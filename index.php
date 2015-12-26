@@ -64,6 +64,8 @@
           <?php write_link("torrent-dump.php", "Show Past Torrents"); ?>
           <p>Get a list of in-download and past torrent contents</p>
       </div>
+      
+      <!-- now that minidlna rescan is in crontab, there's no real need to run it manually: 
       <div class="one-third column">
           <?php write_link("dlna-rescan.php", "Rescan Multimedia"); ?>
           <p>You can force a mini-DLNA server rescan</p>
@@ -72,6 +74,8 @@
           <?php write_link("samba-restart.php", "Restart SAMBA"); ?>
           <p>Force a restart of the SAMBA server</p>
       </div>
+      -->
+      
       <div class="one-third column">
           <?php write_link("force-check.php", "Force extdisc check"); ?>
           <p>Force a check of external disc(s)</p>

@@ -8,7 +8,7 @@
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-	<title>BeagleTorrent Control Panel</title>
+	<title>Light Media Center Control Panel</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 

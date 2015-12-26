@@ -1,6 +1,6 @@
 <?php 
   include 'inc/page-header.php';
-  include 'inc/utils.php';
+  include 'inc/page-utils.php';
 
   if ( $is_authorized )
   {
