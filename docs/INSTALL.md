@@ -254,7 +254,7 @@ to save memory.
 service lighttpd restart
 ```
 
-# then create the symlink in the right place:
+Then create the required symlinks in the right place:
 
 ```
 cd /var/www/html
@@ -325,7 +325,7 @@ make && make install-strip
 As of aria2 1.19.3, aria2 does not come with a default etc file, so a default one is included in Light Media Center sources:
 
 ```
-cd /opt/light-media-center/etc/aria2.conf /etc
+cp /opt/light-media-center/etc/aria2.conf /etc
 
 echo >/var/log/aria2.log
 chown -R pi:pi /home/pi/.aria2 /home/pi/aria2hooks /home/pi/aria2utils /var/log/aria2.log

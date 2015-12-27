@@ -16,15 +16,15 @@ update-install-folder:
 
 download-aux:
 	# install auxiliary software under "web":
-	if [[ ! -d "web/webui-aria2" ]]; then	mkdir -p web/webui-aria2 && cd web && git clone https://github.com/ziahamza/webui-aria2.git ; fi
-	if [[ ! -d "web/yaaw" ]]; then			mkdir -p web/yaaw && cd web && git clone https://github.com/binux/yaaw.git ; fi
-	if [[ ! -d "web/_h5ai" ]]; then			mkdir -p web/_h5ai && cd web && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip ; fi
+	if [ ! -d "web/webui-aria2" ]; then 	mkdir -p web/webui-aria2 && cd web && git clone https://github.com/ziahamza/webui-aria2.git ; fi
+	if [ ! -d "web/yaaw" ]; then			mkdir -p web/yaaw && cd web && git clone https://github.com/binux/yaaw.git ; fi
+	if [ ! -d "web/_h5ai" ]; then			mkdir -p web/_h5ai && cd web && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip ; fi
 
 install-links:
-	ln -s $(current_dir)/web /var/www/html
-	cd bin && for script in *.sh; do                 ln -s $$script /usr/local/bin/$$script ;  done
-	cd bin/aria2utils && for script in *; do         ln -s $$script /usr/local/bin/$$script ;  done
-	cd bin/minidlna_utils && for script in *; do     ln -s $$script /usr/local/bin/$$script ;  done
+	ln -sf $(current_dir)/web /var/www/html
+	cd bin && for script in *.sh; do                 ln -sf $$script /usr/local/bin/$$script ;  done
+	cd bin/aria2utils && for script in *; do         ln -sf $$script /usr/local/bin/$$script ;  done
+	cd bin/minidlna_utils && for script in *; do     ln -sf $$script /usr/local/bin/$$script ;  done
 
 install-cron:
 	echo "# Light Media Center cron script" >/etc/cron.d/light-media-center
