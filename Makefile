@@ -7,21 +7,27 @@
 current_dir = $(shell pwd)
 
 all:
-	
+	@echo "Open the Makefile to get a list of possible targets you can invoke"
+
+update-install-folder:
+	# by default all bash glue scripts assume /opt/light-media-center is used as installation folder... if that's not the case some SED is required:
+	sed -i "s+/opt/light-media-center+$current_dir+g" bin/btmain.sh
 
 download-aux:
-	# install auxiliary software:
-	if [[ ! -d "web/webui-aria2" ]]; then   mkdir -p web/webui-aria2 && cd web && git clone https://github.com/ziahamza/webui-aria2.git ; fi
-	if [[ ! -d "web/yaaw" ]]; then          mkdir -p web/yaaw && cd web && git clone https://github.com/binux/yaaw.git ; fi
-	if [[ ! -d "web/_h5ai" ]]; then         mkdir -p web/_h5ai && cd web && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip ; fi
+	# install auxiliary software under "web":
+	if [[ ! -d "web/webui-aria2" ]]; then	mkdir -p web/webui-aria2 && cd web && git clone https://github.com/ziahamza/webui-aria2.git ; fi
+	if [[ ! -d "web/yaaw" ]]; then			mkdir -p web/yaaw && cd web && git clone https://github.com/binux/yaaw.git ; fi
+	if [[ ! -d "web/_h5ai" ]]; then			mkdir -p web/_h5ai && cd web && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip ; fi
 
 install-links:
 	ln -s $(current_dir)/web /var/www/html
 	echo "export PATH=$(current_dir)/bin:$$PATH" >>/etc/environment
 
 install-cron:
-	echo "# add automatic rescan of media contents every day at 7:00am" >>/etc/cron.d/light-media-center
+	echo "# Light Media Center cron script" >/etc/cron.d/light-media-center
+	echo "# check external disk every day at 8am" >>/etc/cron.d/light-media-center
 	echo "0 8 * * * $(current_dir)/bin/btextdiskcheck.sh >/dev/null 2>&1" >>/etc/cron.d/light-media-center
+	echo "# automatic rescan of media contents every day at 5pm" >>/etc/cron.d/light-media-center
 	echo "0 17 * * * $(current_dir)/bin/btminidlnareload.sh >/dev/null 2>&1" >>/etc/cron.d/light-media-center
 
 install-initd:

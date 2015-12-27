@@ -7,8 +7,8 @@
 # Should-Stop:
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: BeagleTorrent watchdog
-# Description: BeagleTorrent watchdog
+# Short-Description: Light Media Center watchdog
+# Description: Light Media Center watchdog
 ### END INIT INFO
 
 # . /etc/rc.d/init.d/functions  # uncomment/modify for your killproc
@@ -20,19 +20,19 @@ test -x $DAEMON || exit 0
 
 case "$1" in
     start)
-    echo -n "Starting Beagletorrent watchdog:"
+    echo -n "Starting Light Media Center watchdog:"
     start-stop-daemon --start -b --exec $DAEMON
     echo "btwatchdog."
     ;;
     
     stop)
-    echo -n "Stopping Beagletorrent watchdog:"
+    echo -n "Stopping Light Media Center watchdog:"
     start-stop-daemon --stop --oknodo --retry 30 --name $NAME
     echo "btwatchdog."
     ;;
 
     restart)
-    echo -n "Restarting Beagletorrent watchdog:"
+    echo -n "Restarting Light Media Center watchdog:"
     start-stop-daemon --stop --oknodo --retry 30 --name $NAME
     start-stop-daemon --start -b --exec $DAEMON
     echo "btwatchdog."
