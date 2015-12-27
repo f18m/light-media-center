@@ -22,9 +22,9 @@ download-aux:
 
 install-links:
 	ln -sf $(current_dir)/web /var/www/html
-	cd bin && for script in *.sh; do                 ln -sf $$script /usr/local/bin/$$script ;  done
-	cd bin/aria2utils && for script in *; do         ln -sf $$script /usr/local/bin/$$script ;  done
-	cd bin/minidlna_utils && for script in *; do     ln -sf $$script /usr/local/bin/$$script ;  done
+	cd bin && for script in *.sh; do                 ln -sf $(current_dir)/bin/$$script                 /usr/local/bin/$$script ;  done
+	cd bin/aria2utils && for script in *; do         ln -sf $(current_dir)/bin/aria2utils/$$script      /usr/local/bin/$$script ;  done
+	cd bin/minidlna_utils && for script in *; do     ln -sf $(current_dir)/bin/minidlna_utils/$$script  /usr/local/bin/$$script ;  done
 
 install-cron:
 	echo "# Light Media Center cron script" >/etc/cron.d/light-media-center
