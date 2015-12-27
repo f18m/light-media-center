@@ -1,66 +1,49 @@
+# Light Media Center Installation Guide #
+
+This guide provides installation steps assuming you are using a Debian Linux distribution on <a href="https://www.olimex.com/Products/OLinuXino/A20/A20-OLinuXIno-LIME2/">OLinuxino A20 LIME2</a>.
 
 
 
-Per reinstallare tutto su una installazione pulita di 
-
-     _________DEBIAN_____________   su OLinuxino
-
-
-     
-NOTE FOR HANDLING MULTIPLE DISKS IN A BETTER WAY:
-
-    OVERLAYFS
-    
-      mount -t overlay overlay -olowerdir=/media/extdiscMAIN,upperdir=/media/extdiscMAIN2,workdir=/media/extdiscMAIN2/work /media/extdiscMERGED
-
-    https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/overlayfs.txt
-
-    http://www.filesystems.org/project-unionfs.html
-    http://wrapfs.filesystems.org/
-     
-
-
-
-################################## first steps
+## Download of Light Media Center ##
 
 ```
-# first install a very simple web portal to your HTTP server root folder:
-cd /var/www
-git clone https://github.com/f18m/light-media-center.git   html
-
-# install auxiliary software:
-mkdir webui-aria2 && cd webui-aria2 && git clone https://github.com/ziahamza/webui-aria2.git
-mkdir yaaw && cd yaaw && git clone https://github.com/binux/yaaw.git
-mkdir _h5ai && cd _h5ai && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip
+cd /opt
+git clone https://github.com/f18m/light-media-center.git
+make download-aux
+make install-links
+make install-cron
 ```
 
+## Configure bash aliases ##
 
-
-
-################################## configure aliases
-
+```
 rm .bashrc && wget http://frm.users.sourceforge.net/macros/.bashrc
 bash
+```
 
-################################## configure NETWORK stuff
+## Configure networking ##
 
 edit /etc/network/interfaces to have a static IP
 
- ------------------ cut here ----------------------
+------------------ cut here ----------------------
+```
 iface eth0 inet static
     address 192.168.2.98
     netmask 255.255.255.0
     network 192.168.2.0
     gateway 192.168.2.1
+```
 ------------------ cut here ----------------------
  
  
+## Configure SAMBA sharing ##
 
-################################## configure SAMBA stuff 
-
+```
 sudo nano /etc/samba/smb.conf 
+```
 
 ------------------ cut here ----------------------
+```
 # add a [extdisc] section allowing to browse to /media/extdisc:
 
 [extdiscMAIN]
@@ -86,11 +69,13 @@ sudo nano /etc/samba/smb.conf
   public = no
   writable = yes
   browseable = yes
+```
 ------------------ cut here ----------------------
 
+```
 testparm
 service samba restart
-
+```
 
 ################################## configure MINIDLNA stuff
 
@@ -156,26 +141,6 @@ log_dir=/var/log
 echo>/var/log/minidlna.log
 chown -R pi:pi /var/lib/minidlna /var/log/minidlna.log
 
-
-
-
-
-################################## configure CRONTAB LIST
-
-
-as root:
-
-crontab -e
-
-add at the end:
-
------------------- cut here ----------------------
-# add automatic rescan of media contents every day at 7:00am
-0 8 * * * /usr/local/bin/btextdiskcheck.sh >/dev/null 2>&1
-0 17 * * * /usr/local/bin/btminidlnareload.sh >/dev/null 2>&1
------------------- cut here ----------------------
-
-crontab -l
 
 
 
