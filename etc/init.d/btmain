@@ -13,7 +13,7 @@
 
 . /lib/lsb/init-functions
 
-DAEMON=/usr/local/bin/btmain.sh
+DAEMON=/opt/light-media-center/bin/btmain.sh
 NAME=btmain.sh
 
 test -x $DAEMON || exit 0

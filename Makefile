@@ -10,8 +10,9 @@ all:
 	@echo "Open the Makefile to get a list of possible targets you can invoke"
 
 update-install-folder:
-	# by default all bash glue scripts assume /opt/light-media-center is used as installation folder... if that's not the case some SED is required:
-	sed -i "s+/opt/light-media-center+$current_dir+g" bin/btmain.sh
+	# by default all bash glue scripts assume /opt/light-media-center is used as installation folder...
+    # if that's not the case some SED is required:
+	sed -i "s+/opt/light-media-center+$(current_dir)+g" bin/*.sh bin/inc/*.inc.sh etc/init.d/*.sh
 
 download-aux:
 	# install auxiliary software under "web":

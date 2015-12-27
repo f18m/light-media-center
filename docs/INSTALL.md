@@ -24,6 +24,19 @@ rm .bashrc && wget http://frm.users.sourceforge.net/macros/.bashrc
 bash
 ```
 
+## Change system host name ##
+
+```
+sudo nano /etc/hostname
+```
+
+Put "OLinuxino", this will fix the appearance on Samba networks!
+
+```
+sudo nano /etc/hosts
+reboot
+```
+
 ## Ensure required native software is installed ##
 
 ```
@@ -314,7 +327,7 @@ reboot
 
 
 
-### configure MLDONKEY ##
+### Configure MLDONKEY ##
 
 ```
 apt-get install mldonkey-server telnet
@@ -349,7 +362,7 @@ from other terminal
 Then open everywhere in your LAN the port 4080
    
    
-## configure SSMTP (only if you want to receive mail notifications) ##
+## Configure SSMTP (only if you want to receive mail notifications) ##
 
 ```
 apt-get install ssmtp
@@ -410,28 +423,14 @@ echo test | mail -s "testing ssmtp setup" your.email@gmail.com
 
 
 
-## configure UPRECORDS ##
+## Configure UPRECORDS ##
 
 ```
 apt-get install uptimed
 ```
 
 
-## change HOSTNAME ##
-
-```
-sudo nano /etc/hostname
-```
-
-Put "OLinuxino", this will fix the appearance on Samba networks!
-
-```
-sudo nano /etc/hosts
-reboot
-```
-
-
-## configure SECURITY ##
+## Configure SECURITY ##
 
 ```
 nano /etc/ssh/sshd_config
@@ -439,7 +438,7 @@ change "Port 22" -> "Port 512"
 /etc/init.d/ssh restart
 ```
 
-AFTER changing the SSH port number install fail2ban:
+AFTER changing the SSH port number, install fail2ban:
 
 ```
 apt-get install fail2ban

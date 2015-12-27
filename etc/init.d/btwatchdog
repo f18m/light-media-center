@@ -13,7 +13,7 @@
 
 # . /etc/rc.d/init.d/functions  # uncomment/modify for your killproc
 
-DAEMON=/usr/local/bin/btwatchdog.sh
+DAEMON=/opt/light-media-center/bin/btwatchdog.sh
 NAME=btwatchdog.sh
 
 test -x $DAEMON || exit 0
