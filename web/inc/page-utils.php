@@ -1,6 +1,6 @@
 <?php
   $VERSION = "1.5";
-  $PORTAL_NAME = "Light Media Center"
+  $PORTAL_NAME = "Light Media Center";
 
   $is_authorized = False;
   
