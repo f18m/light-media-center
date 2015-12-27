@@ -1,0 +1,75 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides: Aria2
+# Required-Start: $network $local_fs $remote_fs
+# Required-Stop: $network $local_fs $remote_fs
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Aria2 init script.
+# Description: Starts and stops Aria2 services.
+### END INIT INFO
+
+# CONFIG
+ARIA_RUN="/usr/bin/aria2c --conf-path=/etc/aria2.conf"
+ARIA_PID=$(pidof aria2c)
+ARIA_USER="debian"
+
+# Some things that run always
+touch /var/lock/aria2
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+
+start)
+  echo -n "Starting script Aria2: "
+  if [ -z "$ARIA_PID" ]; then
+    su -c "$ARIA_RUN" $ARIA_USER
+    echo "Started"
+  else
+    echo "Aria2 already started"
+  fi
+;;
+
+
+restart)
+  echo -n "Restarting Aria2: "
+  if [ ! -z "$ARIA_PID" ]; then
+    kill $ARIA_PID
+  fi
+  sleep 1
+  ARIA_PID=$(pidof Aria2c)
+  if [ -z "$ARIA_PID" ]; then
+    su -c "$ARIA_RUN" $ARIA_USER
+    echo "Started"
+  else
+    echo "Aria2 already started"
+  fi
+;;
+
+
+stop)
+  echo -n "Stopping script Aria2: "
+  if [ ! -z "$ARIA_PID" ]; then
+    kill $ARIA_PID
+  fi
+  echo "OK"
+;;
+
+
+status)
+  if [ ! -z "$ARIA_PID" ]; then
+    echo "The Aria2 is running with PID = $ARIA_PID"
+  else
+    echo "No process found for Aria2"
+  fi
+;;
+
+
+*)
+  echo "Usage: /etc/init.d/aria2 {start|stop|status|restart}"
+  exit 1
+;;
+
+esac
+
+exit 0
