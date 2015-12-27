@@ -35,3 +35,8 @@ input[type="submit"] {
 form {
     margin-bottom: 0;
 }
+
+div.one-third {
+    height: 7em;
+}
+
