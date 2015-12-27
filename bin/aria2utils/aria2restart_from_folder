@@ -1,0 +1,46 @@
+#! /usr/bin/env python
+
+"""Restart all torrents in a given folders.
+
+Note the aria2 XML-RPC server must be running on localhost:6800
+and it needs to be a newer version (one with --enable-rpc not --enable-xml-rpc).
+"""
+
+import sys
+import argparse
+import xmlrpclib
+import os.path
+import glob
+
+folder = "/media/extdiscTORRENTS/torrents/_current/"   # must end with slash
+secret = "token:ubuntu"
+
+def main(options):
+    """Main program."""
+    url = os.getenv('ARIA2Q_URL', 'http://localhost:6800/rpc')
+
+    server = xmlrpclib.ServerProxy(url)
+
+    glob_results=glob.glob(folder + "*.torrent")
+    print("Connection estabilished with Aria2... restarting the %d torrents stored in %s" % ( len(glob_results), folder))
+    for file in glob_results:
+        add_torrent(server, file)
+    print("No more torrents to resume... exiting")
+    return
+
+def add_torrent(server, fn):
+    print("Adding/resuming the torrent file '%s'" % fn)
+    server.aria2.addTorrent(secret, xmlrpclib.Binary(open(fn).read()))
+
+def get_options():
+    """Get options for the script."""
+    parser = argparse.ArgumentParser(
+            description="view the aria2 queue on localhost:6800",
+             )
+    # parser.add_argument() calls here
+    options = parser.parse_args()
+    # extra processing of options here
+    return options
+
+if __name__ == "__main__":
+    main(get_options())
