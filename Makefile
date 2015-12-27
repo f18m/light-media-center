@@ -11,9 +11,9 @@ all:
 
 download-aux:
 	# install auxiliary software:
-	mkdir -p web/webui-aria2 && cd web/webui-aria2 && git clone https://github.com/ziahamza/webui-aria2.git
-	mkdir -p web/yaaw && cd web/yaaw && git clone https://github.com/binux/yaaw.git
-	mkdir -p web/_h5ai && cd web/_h5ai && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip
+	if [[ ! -d "web/webui-aria2" ]]; then   mkdir -p web/webui-aria2 && cd web && git clone https://github.com/ziahamza/webui-aria2.git ; fi
+	if [[ ! -d "web/yaaw" ]]; then          mkdir -p web/yaaw && cd web && git clone https://github.com/binux/yaaw.git ; fi
+	if [[ ! -d "web/_h5ai" ]]; then         mkdir -p web/_h5ai && cd web && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip ; fi
 
 install-links:
 	ln -s $(current_dir)/web /var/www/html
