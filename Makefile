@@ -4,7 +4,10 @@
 # 26 Dec. 2015
 #
 
+current_dir = $(shell pwd)
+
 all:
 	
+
 install-links:
-	ln -s web/ /var/www/html
+	ln -s $(current_dir)/web /var/www/html

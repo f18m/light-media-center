@@ -15,7 +15,7 @@
 
 ?>
 
-    <p>BeagleTorrent external discs have restarted.</p>
+    <p>External discs have restarted.</p>
 
 <?php 
   }

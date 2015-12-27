@@ -24,7 +24,7 @@
 
 ?>
 
-    <p>BeagleTorrent mini DLNA server is rescanning contents. Please wait.</p>
+    <p>Mini DLNA server is rescanning contents. Please wait.</p>
 
 <?php 
   }

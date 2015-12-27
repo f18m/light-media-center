@@ -124,10 +124,10 @@
       -->
       
       <div class="one-third column">
-          <?php write_php_action_with_confirm("do_shutdown", "Shutdown", "Are you really sure to shutdown the BeagleTorrent?"); ?>
+          <?php write_php_action_with_confirm("do_shutdown", "Shutdown", "Are you really sure to shutdown the " . $PORTAL_NAME . "?"); ?>
       </div>
       <div class="one-third column">
-          <?php write_php_action_with_confirm("do_reboot", "Reboot", "Are you really sure to reboot the BeagleTorrent?"); ?>
+          <?php write_php_action_with_confirm("do_reboot", "Reboot", "Are you really sure to reboot the " . $PORTAL_NAME . "?"); ?>
       </div>
 <?php
 
@@ -160,14 +160,14 @@
     if (strcasecmp($action_status, "reboot_success") == 0)
     {
         include 'inc/page-header.php';    
-        echo "<p>BeagleTorrent is rebooting... it will take about 30sec to return online. Please wait.</p>";
+        echo "<p>$PORTAL_NAME is rebooting... it will take about 30sec to return online. Please wait.</p>";
         write_auto_refresh_after_sec(4000);   // this autorefresh will remove the action_status GET variable so we show that only once
         include 'inc/page-footer.php';
     }
     else if (strcasecmp($action_status, "halt_success") == 0)
     {
         include 'inc/page-header.php';    
-        echo "<p>BeagleTorrent is now shutting down... Please wait until LED turns off before detaching the external disc(s).</p>";
+        echo "<p>$PORTAL_NAME is now shutting down... Please wait until LED turns off before detaching the external disc(s).</p>";
         write_auto_refresh_after_sec(4000);   // this autorefresh will remove the action_status GET variable so we show that only once
         include 'inc/page-footer.php';
     }

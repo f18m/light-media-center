@@ -18,7 +18,7 @@
 
 ?>
 
-    <p>BeagleTorrent Aria2 server is stopping... Please wait.</p>
+    <p>Aria2 server is stopping... Please wait.</p>
 
 <?php 
   }

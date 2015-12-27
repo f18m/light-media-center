@@ -2,6 +2,7 @@
 /*
  IMPORTANT: THIS FILE IS DEPRECATED, SEE CURRENT IMPLEMENTATION IN PAGE-HEADERS.PHP
 */
+var PORTAL_NAME = "Light Media Center";
 
 
 function removeParam(key, sourceURL) {
@@ -24,7 +25,7 @@ function removeParam(key, sourceURL) {
     
 function btn_shutdown() {
     var x;
-    if (confirm("Are you sure you want to shutdown the BeagleTorrent?") == true) {
+    if (confirm("Are you sure you want to shutdown the " + PORTAL_NAME + "?") == true) {
         //var link = "reboot.php?user=" + $_GET('user');
         window.open(link);
     } else {
@@ -34,7 +35,7 @@ function btn_shutdown() {
 
 function auto_closewindow()
 {
-    alert("Please close this window since it's not valid anymore. Please reopen BeagleTorrent home page.");
+    alert("Please close this window since it's not valid anymore. Please reopen " + PORTAL_NAME + " home page.");
     
     // unfortunately scripted-close of a browser window is not allowed anymore, 
     // see http://stackoverflow.com/questions/19761241/window-close-and-self-close-do-not-close-the-window-in-chrome 

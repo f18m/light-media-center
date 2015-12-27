@@ -8,7 +8,7 @@
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-	<title>Light Media Center Control Panel</title>
+	<title><?php echo $PORTAL_NAME; ?> Control Panel</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
@@ -49,7 +49,7 @@
 
 	<div class="container">
 		<div class="sixteen columns">
-			<h1 class="remove-bottom" style="margin-top: 40px">Light Media Center Control Panel</h1>
+			<h1 class="remove-bottom" style="margin-top: 40px"><?php echo $PORTAL_NAME; ?> Control Panel</h1>
 			<h5>Version <?php echo $VERSION; ?>, by Francesco Montorsi</h5>
 			<hr />
 		</div>
