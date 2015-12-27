@@ -1,0 +1,45 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:       btwatchdog
+# Required-Start:
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: BeagleTorrent watchdog
+# Description: BeagleTorrent watchdog
+### END INIT INFO
+
+# . /etc/rc.d/init.d/functions  # uncomment/modify for your killproc
+
+DAEMON=/usr/local/bin/btwatchdog.sh
+NAME=btwatchdog.sh
+
+test -x $DAEMON || exit 0
+
+case "$1" in
+    start)
+    echo -n "Starting Beagletorrent watchdog:"
+    start-stop-daemon --start -b --exec $DAEMON
+    echo "btwatchdog."
+    ;;
+    
+    stop)
+    echo -n "Stopping Beagletorrent watchdog:"
+    start-stop-daemon --stop --oknodo --retry 30 --name $NAME
+    echo "btwatchdog."
+    ;;
+
+    restart)
+    echo -n "Restarting Beagletorrent watchdog:"
+    start-stop-daemon --stop --oknodo --retry 30 --name $NAME
+    start-stop-daemon --start -b --exec $DAEMON
+    echo "btwatchdog."
+    ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+exit 0

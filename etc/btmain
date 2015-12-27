@@ -1,0 +1,42 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:       btmain
+# Required-Start: $networking
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: BeagleTorrent main control loop
+# Description: BeagleTorrent main control loop
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+DAEMON=/usr/local/bin/btmain.sh
+NAME=btmain.sh
+
+test -x $DAEMON || exit 0
+
+case "$1" in
+    start)
+    #log_daemon_msg "Starting Beagletorrent main control loop"
+    start-stop-daemon --start -b --exec $DAEMON
+    ;;
+    
+    stop)
+    #echo "Stopping Beagletorrent main control loop: "
+    start-stop-daemon --stop --oknodo --retry 30 --name $NAME
+    ;;
+
+    restart)
+    #echo "Restarting Beagletorrent main control loop: "
+    start-stop-daemon --stop --oknodo --retry 30 --name $NAME
+    start-stop-daemon --start -b --exec $DAEMON
+    ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+exit 0

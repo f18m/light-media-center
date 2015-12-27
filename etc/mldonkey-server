@@ -1,0 +1,45 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:       mldonkey-server
+# Required-Start: $networking
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: MLdonkey server
+# Description: MLdonkey server
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+DAEMON=/usr/bin/mlnet
+NAME=mlnet
+   # IMPORTANT: when using start-stop-daemon this one must differ from the name of this init.d script, otherwise when using --stop it this script would kill itself!!!
+USER=debian
+
+test -x $DAEMON || exit 0
+
+case "$1" in
+    start)
+    #echo -n "Starting MLdonkey: "
+    start-stop-daemon --start -b --chuid $USER --exec $DAEMON
+    ;;
+    
+    stop)
+    #echo -n "Stopping MLdonkey: "
+    start-stop-daemon --stop --chuid $USER --oknodo --retry 30 --name $NAME
+    ;;
+
+    restart)
+    #echo -n "Restarting MLdonkey: "
+    start-stop-daemon -v --stop --chuid $USER --oknodo --retry 30 --name $NAME || true
+    sleep 5
+    start-stop-daemon --start -b --chuid $USER --exec $DAEMON
+    ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+exit 0
