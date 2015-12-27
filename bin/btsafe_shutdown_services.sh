@@ -2,7 +2,7 @@
 
 # CONFIGURATION:
 
-source /usr/local/bin/btmain.inc.sh
+source /opt/light-media-center/bin/btmain.inc.sh
 LOG_FILE="/var/log/btsafeshutdown.log"
 
 
@@ -45,7 +45,7 @@ FINAL_ACTION="$1"
 
 
 # init Bash Shell Function Library (BSFL)
-source /usr/local/bin/bsfl
+source /opt/light-media-center/bin/bsfl
 START=`now`
 
 sleep 2
