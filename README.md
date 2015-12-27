@@ -11,6 +11,10 @@ Some features of the media center:
 0. Responsive web design (thanks to Skeleton template) for use by smartphones/tablets
 0. Tested on Beaglebone, Raspberry and OLinuxino
 
+## Screenshots ##
+
+<img src="docs/screenshot1.png" />
+
 
 ## How to Install ##
 
