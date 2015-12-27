@@ -2,7 +2,7 @@
 
 # CONFIGURATION:
 
-source /usr/local/bin/inc/btmain.inc.sh
+source /opt/light-media-center/bin/inc/btmain.inc.sh
 LOG_FILE="/var/log/btextdiskcheck.log"
 
 
@@ -43,16 +43,16 @@ function check_current_disc {
 
 # IMPLEMENTATION:
 
-source /usr/local/bin/bsfl
+source /opt/light-media-center/bin/bsfl
 START=`now`
 
 # first of all, shutdown all services relying on ext discs:
-/usr/local/bin/btsafe_shutdown_services.sh        
+/opt/light-media-center/bin/btsafe_shutdown_services.sh        
 msg '***************************************************************************'
 for (( CURRENTdisk=1 ; CURRENTdisk <= $num_disks ; CURRENTdisk++ )); do
     check_current_disc
     msg '  ---------------  '
 done  
 
-msg 'Restarting the main Beagletorrent control loop'
+msg 'Restarting the main $PORTAL_NAME control loop'
 /etc/init.d/btmain restart

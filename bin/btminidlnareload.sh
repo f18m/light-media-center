@@ -2,7 +2,7 @@
 
 # CONFIGURATION:
 
-source /usr/local/bin/inc/btmain.inc.sh
+source /opt/light-media-center/bin/inc/btmain.inc.sh
 LOG_FILE="/var/log/btminidlnareload.log"
 
 
@@ -32,7 +32,7 @@ function check_current_disc {
 
 # IMPLEMENTATION:
 
-source /usr/local/bin/bsfl
+source /opt/light-media-center/bin/bsfl
 START=`now`
 
 # first of all, shutdown all services relying on ext discs:

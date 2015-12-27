@@ -7,8 +7,8 @@
 # Should-Stop:
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: BeagleTorrent main control loop
-# Description: BeagleTorrent main control loop
+# Short-Description: Light Media Center main control loop
+# Description: Light Media Center main control loop
 ### END INIT INFO
 
 . /lib/lsb/init-functions
@@ -20,17 +20,17 @@ test -x $DAEMON || exit 0
 
 case "$1" in
     start)
-    #log_daemon_msg "Starting Beagletorrent main control loop"
+    #log_daemon_msg "Starting Light Media Center main control loop"
     start-stop-daemon --start -b --exec $DAEMON
     ;;
     
     stop)
-    #echo "Stopping Beagletorrent main control loop: "
+    #echo "Stopping Light Media Center main control loop: "
     start-stop-daemon --stop --oknodo --retry 30 --name $NAME
     ;;
 
     restart)
-    #echo "Restarting Beagletorrent main control loop: "
+    #echo "Restarting Light Media Center main control loop: "
     start-stop-daemon --stop --oknodo --retry 30 --name $NAME
     start-stop-daemon --start -b --exec $DAEMON
     ;;

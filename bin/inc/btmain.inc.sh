@@ -1,7 +1,9 @@
 #!/bin/bash
-# BeagleTorrent main control loop CONFIGURATION CONSTANTS
+# Light Media Center main control loop CONFIGURATION CONSTANTS
 
 # CONFIGURATION:
+
+PORTAL_NAME="Light Media Center";
 
 # services to start as soon as the external disk is mounted:
 enable_rtorrent=false
@@ -13,7 +15,7 @@ daemon_user="debian"
 daemon_user_uid="$(id -u $daemon_user)"
 daemon_user_gid="$(id -g $daemon_user)"
 
-# see my notes about best partitioning for BeagleTorrent:
+# see my notes about best partitioning for Light Media Center:
 MAIN1disk=1
 disklabel[$MAIN1disk]="MAIN1"
 disktype[$MAIN1disk]="vfat"
@@ -44,8 +46,6 @@ targetcheck[$TORRENTSdisk]="${target[$TORRENTSdisk]}/torrents"
 
 num_disks=4
 
-
-####logfile="/var/log/beagletorrent_main"
 LOG_ENABLED=y
 preferredTZ="Europe/Rome"
 

@@ -1,5 +1,5 @@
 #!/bin/bash -x 
-# BeagleTorrent main control loop daemon
+# Light Media Center main control loop daemon
 # Tries to mount external part and if succeeds, runs rTorrent/Aria2 and miniDLNA
 # by Francesco Montorsi (c) 2013
 # 
@@ -8,7 +8,7 @@
 
 # CONFIGURATION:
 
-source /usr/local/bin/inc/btmain.inc.sh
+source /opt/light-media-center/bin/inc/btmain.inc.sh
 LOG_FILE="/var/log/btmain.log"
 
 
@@ -251,7 +251,7 @@ function run_loop {
 }
 
 # init Bash Shell Function Library (BSFL)
-source /usr/local/bin/inc/bsfl
+source /opt/light-media-center/bin/inc/bsfl
 START=`now`
 
 run_loop
