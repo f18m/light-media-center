@@ -37,6 +37,20 @@ sudo nano /etc/hosts
 reboot
 ```
 
+
+## Ensure debian user exists ##
+
+This guide makes the assumption that a "debian" user exists on the system.
+All software that does not need to run as root is run as "debian", so make sure it exists
+(you can check in /etc/passwd) or otherwise add it:
+
+```
+apt-get install passwd
+useradd debian
+```
+
+
+
 ## Ensure required native software is installed ##
 
 ```
@@ -308,22 +322,29 @@ make && make install-strip
 # go take a coffeee!!! takes >1h
 ```
 
-copy in /etc  the file aria2.conf
-copy in /home/pi aria2hooks & aria2utils
+As of aria2 1.19.3, aria2 does not come with a default etc file, so a default one is included in Light Media Center sources:
 
 ```
-echo>/var/log/aria2.log
+cd /opt/light-media-center/etc/aria2.conf /etc
+
+echo >/var/log/aria2.log
 chown -R pi:pi /home/pi/.aria2 /home/pi/aria2hooks /home/pi/aria2utils /var/log/aria2.log
 chmod -R ug+rw /home/pi/.aria2 /home/pi/aria2hooks /home/pi/aria2utils /var/log/aria2.log
-cd /home/pi/aria2utils && ./install.sh
 
 /etc/init.d/aria2 start
 ```
 
-Use aria2q utility to verify it's working
+Use aria2q utility to verify it's working:
 
+```
+aria2q
+```
+
+Then modify RPC port and password if needed and set them in the webui-aria2 config file:
+
+```
 nano /var/www/html/webui-aria2/configuration.js
-reboot
+```
 
 
 

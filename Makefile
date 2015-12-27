@@ -11,7 +11,7 @@ all:
 
 update-install-folder:
 	# by default all bash glue scripts assume /opt/light-media-center is used as installation folder...
-    # if that's not the case some SED is required:
+	# if that's not the case some SED is required:
 	sed -i "s+/opt/light-media-center+$(current_dir)+g" bin/*.sh bin/inc/*.inc.sh etc/init.d/*.sh
 
 download-aux:
@@ -22,7 +22,9 @@ download-aux:
 
 install-links:
 	ln -s $(current_dir)/web /var/www/html
-	echo "export PATH=$(current_dir)/bin:$$PATH" >>/etc/environment
+	cd bin && for script in *.sh; do                 ln -s $$script /usr/local/bin/$$script ;  done
+	cd bin/aria2utils && for script in *; do         ln -s $$script /usr/local/bin/$$script ;  done
+	cd bin/minidlna_utils && for script in *; do     ln -s $$script /usr/local/bin/$$script ;  done
 
 install-cron:
 	echo "# Light Media Center cron script" >/etc/cron.d/light-media-center
@@ -42,7 +44,7 @@ install-initd:
 	update-rc.d mldonkey-server defaults
 	update-rc.d noip2 defaults
 	update-rc.d aria2 defaults
-	
+
 install-logrotate:
 	cp etc/logrotate.d/aria2 /etc/logrotate.d/
 	cp etc/logrotate.d/btmain /etc/logrotate.d/
