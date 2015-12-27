@@ -10,7 +10,7 @@
     exec('sudo /etc/init.d/samba restart'); 
 ?>
 
-    <p>BeagleTorrent SAMBA server just restarted.</p>
+    <p>SAMBA server just restarted.</p>
 
 <?php 
   }

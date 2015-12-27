@@ -12,15 +12,9 @@ Some features of the media center:
 
 See  <a href="docs/INSTALL.md">INSTALL.md</a>.
 
-```
-# first install a very simple web portal to your HTTP server root folder:
-cd /var/www
-git clone https://github.com/f18m/light-media-center.git   html
+# Future Directions
 
-# install auxiliary software:
-mkdir webui-aria2 && cd webui-aria2 && git clone https://github.com/ziahamza/webui-aria2.git
-mkdir yaaw && cd yaaw && git clone https://github.com/binux/yaaw.git
-mkdir _h5ai && cd _h5ai && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip
-```
+Convert this project to <a href="http://doxfer.webmin.com/Webmin/Module_Development">Webmin modules</a> (unfortunately
+this would require me to learn Perl!). A webmin module for Minidlna already exists: http://sourceforge.net/p/minidlnawebmin
 
 

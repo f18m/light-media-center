@@ -18,7 +18,7 @@
 
 ?>
 
-    <p>BeagleTorrent rtorrent server is (re)starting. Please wait.</p>
+    <p>rTorrent server is (re)starting. Please wait.</p>
 
 <?php 
   }

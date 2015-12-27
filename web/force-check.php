@@ -13,7 +13,7 @@
 ?>
 
 
-  BeagleTorrent has checked external discs:<br/>
+  External discs have been checked for errors:<br/>
   <textarea class="system_status" cols="90" readonly><?php echo $extdisc_check; ?></textarea>
   
 <?php 

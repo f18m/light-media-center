@@ -21,7 +21,7 @@
     shutdown_processes();
 ?>
 
-    <p>BeagleTorrent external disc have been stopped... you can now remove them.</p>
+    <p>External disc have been stopped... you can now remove them.</p>
 
 <?php 
   }

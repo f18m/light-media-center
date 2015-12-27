@@ -1,5 +1,6 @@
 <?php
   $VERSION = "1.5";
+  $PORTAL_NAME = "Light Media Center"
 
   $is_authorized = False;
   
@@ -15,9 +16,7 @@
      $username = str_rot13( $enc_user );
      //echo "Username is $username";
      
-     include 'inc/allowed-user.php';
-     
-     if (!isset($allowed_user))
+     if(!@include("inc/allowed-user.php"))
      {
          // no list of authorized users available... everybody is authorized
          $is_authorized = True;
