@@ -1,0 +1,13 @@
+/var/log/minidlna.log
+{
+	rotate 4
+	weekly
+	missingok
+	notifempty
+	delaycompress
+	compress
+	create 0644 minidlna minidlna
+	postrotate
+		service minidlna rotate > /dev/null
+	endscript
+}
