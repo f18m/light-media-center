@@ -22,14 +22,20 @@ See  <a href="docs/INSTALL.md">INSTALL.md</a>.
 
 ## Future Directions ##
 
+### WebMin? ### 
 Convert this project to <a href="http://doxfer.webmin.com/Webmin/Module_Development">Webmin modules</a> (unfortunately
 this would require me to learn Perl!). A webmin module for Minidlna already exists: http://sourceforge.net/p/minidlnawebmin
 
+### Multiple Hard Disks ###
 To handle multiple hard disks in a clean, safe way, a better approach compared to the one used now (i.e., having multiple /media folders to manage) could be to
 use the OVERLAYFS (https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/overlayfs.txt):
 
 ```
       mount -t overlay overlay -olowerdir=/media/extdiscMAIN,upperdir=/media/extdiscMAIN2,workdir=/media/extdiscMAIN2/work /media/extdiscMERGED
 ```
-
 or similar approaches:  http://www.filesystems.org/project-unionfs.html,  http://wrapfs.filesystems.org/
+
+### Disk Usage ###
+Add NCDU (https://dev.yorhel.nl/ncdu) utility?
+Add philesight (http://zevv.nl/play/code/philesight/) utility?
+
