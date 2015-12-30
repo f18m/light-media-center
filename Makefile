@@ -34,11 +34,11 @@ install-cron:
 	echo "0 17 * * * $(current_dir)/bin/btminidlnareload.sh >/dev/null 2>&1" >>/etc/cron.d/light-media-center
 
 install-initd:
-	cp etc/init.d/btmain /etc/init.d/btmain
-	cp etc/init.d/btwatchdog /etc/init.d/btwatchdog
-	cp etc/init.d/mldonkey-server /etc/init.d/mldonkey-server
-	cp etc/init.d/noip2 /etc/init.d/noip2
-	cp etc/init.d/aria2 /etc/init.d/aria2
+	cp -pf etc/init.d/btmain /etc/init.d/btmain
+	cp -pf etc/init.d/btwatchdog /etc/init.d/btwatchdog
+	cp -pf etc/init.d/mldonkey-server /etc/init.d/mldonkey-server
+	cp -pf etc/init.d/noip2 /etc/init.d/noip2
+	cp -pf etc/init.d/aria2 /etc/init.d/aria2
 	update-rc.d btmain defaults
 	update-rc.d btwatchdog defaults
 	update-rc.d mldonkey-server defaults
@@ -46,9 +46,9 @@ install-initd:
 	update-rc.d aria2 defaults
 
 install-logrotate:
-	cp etc/logrotate.d/aria2 /etc/logrotate.d/
-	cp etc/logrotate.d/btmain /etc/logrotate.d/
-	cp etc/logrotate.d/minidlna /etc/logrotate.d/
+	cp -pf etc/logrotate.d/aria2 /etc/logrotate.d/
+	cp -pf etc/logrotate.d/btmain /etc/logrotate.d/
+	cp -pf etc/logrotate.d/minidlna /etc/logrotate.d/
 
 install-email-on-boot:
 	echo "# send an email to inform about the boot" >>/etc/rc.local
