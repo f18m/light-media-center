@@ -1,16 +1,30 @@
 # Light Media Center Installation Guide #
 
-This guide provides installation steps assuming you are using a Debian Linux distribution on <a href="https://www.olimex.com/Products/OLinuXino/A20/A20-OLinuXIno-LIME2/">OLinuxino A20 LIME2</a>.
-Note that all install procedures that are easy and safe to automate have been included in the Light Media Center makefile as install-SOMETHING targets; however tasks that are non-trivial to automate or strongly dependent upon the specific Linux distribution version or 3rd party software versions are instead listed here as manual steps.
+The installation steps are divided in the steps required to configure some system services (like LAN/Internet connectivity, email server, Samba sharing, etc) and those required to instead download/build/configure LightMediaCenter-specific softwares.
+
+Beware that these guides assume that you know what you are doing. They should be considered as handy HOW-TO guides for expert users only. 
+
+
+## Hardware Required ##
+
+This guide provides installation steps assuming you are using Debian GNU/Linux 8.1 (jessie) distribution on <a href="https://www.olimex.com/Products/OLinuXino/A20/A20-OLinuXIno-LIME2/">OLinuxino A20 LIME2</a>.
+However, it contains also references and some notes that apply to other HW / SW combinations like:
+- BeagleBone with Ubuntu
+- Raspberry PI model B with Raspbian
+Later in this guide, such hardware will be referred to as "the single-board computer (SBC)".
+
+Moreover this guide assumes that you have:
+- Internet connectivity on the SBC
+- An external hard drive, connected to the SBC either by USB or by SATA (in case of OLinuxino A20 LIME2)
 
 
 ## Configuration of Default System Packages ##
 
-See  <a href="docs/INSTALL.SYSTEM.md">INSTALL.SYSTEM.md</a>.
+See  <a href="INSTALL.SYSTEM.md">INSTALL.SYSTEM.md</a>.
 
 
 ## Build/Configuration of Media Center Software ##
 
-See  <a href="docs/INSTALL.MEDIACENTER.md">INSTALL.MEDIACENTER.md</a>.
+See  <a href="INSTALL.MEDIACENTER.md">INSTALL.MEDIACENTER.md</a>.
 
 

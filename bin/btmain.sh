@@ -1,7 +1,7 @@
 #!/bin/bash -x 
 # Light Media Center main control loop daemon
-# Tries to mount external part and if succeeds, runs rTorrent/Aria2 and miniDLNA
-# by Francesco Montorsi (c) 2013
+# Tries to mount external partitions and if succeeds, runs rTorrent/Aria2 and miniDLNA
+# by Francesco Montorsi (c) 2013-2016
 # 
 # Install in /usr/local/bin and run this at startup via the LSB init script btmain
 # NOTE: this script WILL NOT RETURN, RATHER IT WILL RUN AS AN ENDLESS LOOP

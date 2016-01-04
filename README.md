@@ -22,7 +22,7 @@ See  <a href="docs/INSTALL.md">INSTALL.md</a>.
 
 ## Future Directions ##
 
-### WebMin? ### 
+### WebMin ### 
 Convert this project to <a href="http://doxfer.webmin.com/Webmin/Module_Development">Webmin modules</a> (unfortunately
 this would require me to learn Perl!). A webmin module for Minidlna already exists: http://sourceforge.net/p/minidlnawebmin
 
@@ -35,7 +35,12 @@ use the OVERLAYFS (https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.g
 ```
 or similar approaches:  http://www.filesystems.org/project-unionfs.html,  http://wrapfs.filesystems.org/
 
+Alternatively, a system like Git Annex (http://git-annex.branchable.com/) may be able to handle contents scattered on several hard disks.
+
 ### Disk Usage ###
 Add NCDU (https://dev.yorhel.nl/ncdu) utility?
 Add philesight (http://zevv.nl/play/code/philesight/) utility?
 
+### Support for Remote hard drives ###
+Several new routers/modems allow for attaching network-shared storage disks.
+E.g. TPLINK W8970 modem activates an FTP server on a specific IP address.
