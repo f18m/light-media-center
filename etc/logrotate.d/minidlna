@@ -6,7 +6,7 @@
 	notifempty
 	delaycompress
 	compress
-	create 0644 minidlna minidlna
+	create 0644 debian debian
 	postrotate
 		service minidlna rotate > /dev/null
 	endscript

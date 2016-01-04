@@ -57,7 +57,7 @@
           <p>Access MAIN disc partition contents via web interface</p>
       </div>
       <div class="one-third column">
-          <?php write_link("/extdiscTORRENTS/torrents", "In-download contents"); ?>
+          <?php write_link("/extdiscTORRENTS", "In-download contents"); ?>
           <p>Access TORRENTS disc partition contents via web interface</p>
       </div>
       <div class="one-third column">

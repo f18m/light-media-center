@@ -21,6 +21,7 @@ download-aux:
 	if [ ! -d "web/_h5ai" ]; then			mkdir -p web/_h5ai && cd web && wget https://release.larsjung.de/h5ai/h5ai-0.28.1.zip && unzip h5ai-0.28.1.zip ; fi
 
 install-links:
+	if [ -d "/var/www/html" ]; then                  mv /var/www/html /var/www/htmlOLD ; fi
 	ln -sf $(current_dir)/web /var/www/html
 	cd bin && for script in *.sh; do                 ln -sf $(current_dir)/bin/$$script                 /usr/local/bin/$$script ;  done
 	cd bin/aria2utils && for script in *; do         ln -sf $(current_dir)/bin/aria2utils/$$script      /usr/local/bin/$$script ;  done
