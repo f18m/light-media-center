@@ -87,6 +87,15 @@ make install-logrotate
 make install-email-on-boot
 ```
 
+Now configure main script options:
+
+```
+nano /opt/light-media-center/bin/inc/btmain.inc.sh
+```
+
+In particular, configure the label of your external disk partition, which services do you want to start upon external disk attach, etc.
+
+
 
 ## 2) Configure MINIDLNA stuff ##
 
