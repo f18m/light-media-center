@@ -1,0 +1,16 @@
+[Unit]
+Description=LightMedia Center main control loop daemon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/opt/light-media-center/bin/btmain.sh
+ProtectSystem=off
+ProtectHome=off
+PrivateDevices=on
+NoNewPrivileges=off
+
+[Install]
+WantedBy=multi-user.target
