@@ -1,5 +1,9 @@
 #!/bin/bash
-# Light Media Center main control loop CONFIGURATION CONSTANTS
+# Light Media Center 
+# https://github.com/f18m/light-media-center
+#
+# Main control loop CONFIGURATION CONSTANTS
+
 
 # CONFIGURATION:
 
@@ -8,43 +12,45 @@ PORTAL_NAME="Light Media Center";
 # services to start as soon as the external disk is mounted:
 enable_rtorrent=false
 enable_aria2=true
-enable_mldonkey=true
+enable_mldonkey=false
 enable_minidlna=true
 enable_samba=true
 daemon_user="debian"
 daemon_user_uid="$(id -u $daemon_user)"
 daemon_user_gid="$(id -g $daemon_user)"
 
+use_systemctl=true
+
 # see my notes about best partitioning for Light Media Center:
 MAIN1disk=1
-disklabel[$MAIN1disk]="MAIN1"
-disktype[$MAIN1disk]="vfat"
-mountopt[$MAIN1disk]="rw,exec,gid=$daemon_user_gid,uid=$daemon_user_uid,umask=000"                  # for vfat and ntfs
-target[$MAIN1disk]="/media/extdiscMAIN"
-targetcheck[$MAIN1disk]="${target[$MAIN1disk]}/films"
+disklabel[$MAIN1disk]="LIGHTMEDIACENTER"
+disktype[$MAIN1disk]="ext3"
+mountopt[$MAIN1disk]="rw,noatime,nodiratime,errors=remount-ro"   # for ext
+target[$MAIN1disk]="/media/extdisc"
+targetcheck[$MAIN1disk]="${target[$MAIN1disk]}/torrents"
 
-MAIN2disk=2
-disklabel[$MAIN2disk]="MAIN2"
-disktype[$MAIN2disk]="vfat"
-mountopt[$MAIN2disk]="rw,exec,gid=$daemon_user_gid,uid=$daemon_user_uid,umask=000"                  # for vfat and ntfs
-target[$MAIN2disk]="/media/extdiscMAIN2"
-targetcheck[$MAIN2disk]="${target[$MAIN2disk]}/films"
+# MAIN2disk=2
+# disklabel[$MAIN2disk]="MAIN2"
+# disktype[$MAIN2disk]="vfat"
+# mountopt[$MAIN2disk]="rw,exec,gid=$daemon_user_gid,uid=$daemon_user_uid,umask=000"                  # for vfat and ntfs
+# target[$MAIN2disk]="/media/extdiscMAIN2"
+# targetcheck[$MAIN2disk]="${target[$MAIN2disk]}/films"
 
-MAIN3disk=3
-disklabel[$MAIN3disk]="MAIN3"
-disktype[$MAIN3disk]="vfat"
-mountopt[$MAIN3disk]="rw,exec,gid=$daemon_user_gid,uid=$daemon_user_uid,umask=000"                  # for vfat and ntfs
-target[$MAIN3disk]="/media/extdiscMAIN3"
-targetcheck[$MAIN3disk]="${target[$MAIN3disk]}/films"
+# MAIN3disk=3
+# disklabel[$MAIN3disk]="MAIN3"
+# disktype[$MAIN3disk]="vfat"
+# mountopt[$MAIN3disk]="rw,exec,gid=$daemon_user_gid,uid=$daemon_user_uid,umask=000"                  # for vfat and ntfs
+# target[$MAIN3disk]="/media/extdiscMAIN3"
+# targetcheck[$MAIN3disk]="${target[$MAIN3disk]}/films"
 
-TORRENTSdisk=4
-disklabel[$TORRENTSdisk]="TORRENTS"
-disktype[$TORRENTSdisk]="ext4"
-mountopt[$TORRENTSdisk]="rw,noatime,nodiratime,errors=remount-ro"   # for ext
-target[$TORRENTSdisk]="/media/extdiscTORRENTS"
-targetcheck[$TORRENTSdisk]="${target[$TORRENTSdisk]}/torrents"
+# TORRENTSdisk=4
+# disklabel[$TORRENTSdisk]="TORRENTS"
+# disktype[$TORRENTSdisk]="ext4"
+# mountopt[$TORRENTSdisk]="rw,noatime,nodiratime,errors=remount-ro"   # for ext
+# target[$TORRENTSdisk]="/media/extdiscTORRENTS"
+# targetcheck[$TORRENTSdisk]="${target[$TORRENTSdisk]}/torrents"
 
-num_disks=4
+num_disks=1
 
 LOG_ENABLED=y
 preferredTZ="Europe/Rome"

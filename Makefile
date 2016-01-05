@@ -35,6 +35,7 @@ install-cron:
 	echo "0 17 * * * $(current_dir)/bin/btminidlnareload.sh >/dev/null 2>&1" >>/etc/cron.d/light-media-center
 
 install-initd:
+  # use this target only if your distribution is still using SysV init scripts, otherwise use install-systemd
 	cp -pf etc/init.d/btmain /etc/init.d/btmain
 	cp -pf etc/init.d/btwatchdog /etc/init.d/btwatchdog
 	cp -pf etc/init.d/mldonkey-server /etc/init.d/mldonkey-server
@@ -45,6 +46,11 @@ install-initd:
 	update-rc.d mldonkey-server defaults
 	update-rc.d noip2 defaults
 	update-rc.d aria2 defaults
+
+install-systemd:
+	ln -sf $(current_dir)/etc/system.d/btmain.service /lib/systemd/system/btmain.service
+	ln -sf $(current_dir)/etc/system.d/minidlnad.service /lib/systemd/system/minidlnad.service
+  # TODO remaining ones!
 
 install-logrotate:
 	cp -pf etc/logrotate.d/aria2 /etc/logrotate.d/

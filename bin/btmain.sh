@@ -1,7 +1,10 @@
-#!/bin/bash -x 
-# Light Media Center main control loop daemon
-# Tries to mount external part and if succeeds, runs rTorrent/Aria2 and miniDLNA
-# by Francesco Montorsi (c) 2013
+#!/bin/bash
+# Light Media Center 
+# https://github.com/f18m/light-media-center
+#
+# Main control loop daemon
+# Tries to mount external partitions and if succeeds, runs rTorrent/Aria2 and miniDLNA
+# by Francesco Montorsi (c) 2013-2016
 # 
 # Install in /usr/local/bin and run this at startup via the LSB init script btmain
 # NOTE: this script WILL NOT RETURN, RATHER IT WILL RUN AS AN ENDLESS LOOP
@@ -12,8 +15,8 @@ source /opt/light-media-center/bin/inc/btmain.inc.sh
 LOG_FILE="/var/log/btmain.log"
 
 
-# IMPLEMENTATION - TORRENTS part
-# NOTE: "torrent" part is the one using a filesystem good for torrent downloading and thus having a lot of read/writes
+# IMPLEMENTATION - TORRENTS partition
+# NOTE: "torrent" partition is the one using a filesystem good for torrent downloading and thus having a lot of read/writes
 
 function on_torrent_part_mounted {
     begin_new_logline
@@ -72,31 +75,98 @@ function on_torrent_part_ok {
 }
 
 
-# IMPLEMENTATION - MAIN part
-# NOTE: "main" part is the one using a filesystem compatible with Windows and where the downloaded torrents are moved.
+# IMPLEMENTATION - MAIN partition
+# NOTE: "main" partition is the one where the downloaded torrents are moved once download is complete.
 
 function on_main_part_mounted {
+
+    # this function is called when the MAIN partition is mounted after that for some time the partition disappeared
+    # (external disc was removed)  
+
     begin_new_logline
     if [ "$enable_minidlna" = true ] ; then
         echo -n "attempting start of miniDLNA..." >>$LOG_FILE
-        /etc/init.d/minidlna restart >>$LOG_FILE
+        if [ "$use_systemctl" = true ] ; then
+            service minidlnad restart
+        else
+            /etc/init.d/minidlna restart >>$LOG_FILE
+        fi
     fi
     if [ "$enable_samba" = true ] ; then
         echo -n "attempting start of SAMBA..." >>$LOG_FILE
         /etc/init.d/samba restart >>$LOG_FILE
     fi
+    
+    if [ "$enable_rtorrent" = true ] ; then
+        echo -n "attempting start of rTorrent..." >>$LOG_FILE
+        /etc/init.d/rtorrentdaemon restart >>$LOG_FILE
+    fi
+    if [ "$enable_aria2" = true ] ; then
+        echo -n "attempting start of Aria2..." >>$LOG_FILE
+        /etc/init.d/aria2 restart >>$LOG_FILE
+    fi
+    if [ "$enable_mldonkey" = true ] ; then
+        echo -n "attempting start of MLdonkey..." >>$LOG_FILE
+        /etc/init.d/mldonkey-server restart >>$LOG_FILE
+    fi
+    if [ "$enable_samba" = true ] ; then
+        echo -n "attempting start of SAMBA..." >>$LOG_FILE
+        /etc/init.d/samba restart >>$LOG_FILE
+    fi
+    
+    
     echo "completed post-mount sequence." >>$LOG_FILE
 }
 
 function on_main_part_ok {
+
+    # this function is called when the MAIN partition is in-place just to verify that everything is still OK
+    # and act if that's not the case
+    
     if [ "$enable_minidlna" = true ] ; then
         minidlna_pid=$(pgrep minidlna)
         if [[ -z $minidlna_pid ]]; then
             echo -n "WARNING: miniDLNA down... trying to restart it..." >>$LOG_FILE
-            /etc/init.d/minidlna restart >>$LOG_FILE
+            if [ "$use_systemctl" = true ] ; then
+                service minidlnad restart
+            else
+                /etc/init.d/minidlna restart >>$LOG_FILE
+            fi
             problem_found=miniDLNA
         else
             echo -n "miniDLNA OK..." >>$LOG_FILE
+        fi
+    fi
+    if [ "$enable_rtorrent" = true ] ; then
+        rtorr_pid=$(pgrep rtorrent)
+        if [[ -z $rtorr_pid ]]; then
+            echo -n "WARNING: rTorrent down... trying to restart it..." >>$LOG_FILE
+            /etc/init.d/rtorrentdaemon restart >>$LOG_FILE
+            problem_found=rTorrent
+        else
+            echo -n "rTorrent OK..." >>$LOG_FILE
+        fi
+    fi
+
+    if [ "$enable_aria2" = true ] ; then
+        aria2_pid=$(pgrep aria2c)
+        if [[ -z $aria2_pid ]]; then
+            echo -n "WARNING: Aria2 down... trying to restart it..." >>$LOG_FILE
+            /etc/init.d/aria2 restart >>$LOG_FILE
+            problem_found=Aria2
+        else
+            echo -n "Aria2 OK..." >>$LOG_FILE
+        fi
+    fi
+    
+    if [ "$enable_mldonkey" = true ] ; then
+        mlnet_pid=$(pgrep mlnet)
+        if [[ -z $mlnet_pid ]]; then
+            echo -n "WARNING: MLdonkey down... trying to restart it..." >>$LOG_FILE
+            /etc/init.d/mldonkey-server restart >>$LOG_FILE
+            problem_found=MLdonkey
+        else
+            echo -n "MLdonkey OK..." >>$LOG_FILE
         fi
     fi
 }
