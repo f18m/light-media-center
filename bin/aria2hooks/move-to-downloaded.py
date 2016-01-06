@@ -35,7 +35,7 @@ mb = 1024*1024;
 gb = 1024*1024*1024;
 MAX_SIZE_THRESHOLD = 4*gb; 
 
-DL_PREFIX = "/media/extdisc/torrents/"
+DL_PREFIX = "/media/extdisc/.in-download/torrents/"
 DEST_PREFIX = ( "/media/extdisc/" )
 DEST_FOLDER_NAME = "to_reorder"
 LOGFILE = "/var/log/aria2hooks.log"
@@ -148,7 +148,7 @@ def get_options():
     # example of the result:
     # options.GID=55933f47abdb64e3
     # options.nfiles=1
-    # options.path=/media/extdiscTORRENTS/torrents/Wolfenstein.The New Order.v 1.0.0.1.(1\u0421-\u0421\u043e\u0444\u0442\u041a\u043b\u0430\u0431).(2014).Repack/video-3.bin
+    # options.path=/media/extdiscTORRENTS/torrents/Some.File.(1\u0421-\u0421\u043e\u0444\u0442\u041a\u043b\u0430\u0431)/name.ext
  
     return options
 

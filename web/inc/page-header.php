@@ -51,7 +51,7 @@
 		<div class="columns">
       <img src="images/apple-touch-icon-72x72.png" style="float:left; margin-top: 40px"/>
 			<h1 class="remove-bottom" style="margin-top: 40px"><?php echo $PORTAL_NAME; ?> Control Panel</h1>
-			<h5 style="text-align: right">Version <?php echo $VERSION; ?>, by Francesco Montorsi</h5>
+			<h5 style="text-align: right">Version <?php echo $VERSION; ?></h5>
 			<hr />
 		</div>
 

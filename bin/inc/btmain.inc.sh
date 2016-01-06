@@ -27,7 +27,7 @@ disklabel[$MAIN1disk]="LIGHTMEDIACENTER"
 disktype[$MAIN1disk]="ext3"
 mountopt[$MAIN1disk]="rw,noatime,nodiratime,errors=remount-ro"   # for ext
 target[$MAIN1disk]="/media/extdisc"
-targetcheck[$MAIN1disk]="${target[$MAIN1disk]}/torrents"
+targetcheck[$MAIN1disk]="${target[$MAIN1disk]}/.in-download/torrents"
 
 # MAIN2disk=2
 # disklabel[$MAIN2disk]="MAIN2"

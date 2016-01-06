@@ -92,11 +92,6 @@ function on_main_part_mounted {
             /etc/init.d/minidlna restart >>$LOG_FILE
         fi
     fi
-    if [ "$enable_samba" = true ] ; then
-        echo -n "attempting start of SAMBA..." >>$LOG_FILE
-        /etc/init.d/samba restart >>$LOG_FILE
-    fi
-    
     if [ "$enable_rtorrent" = true ] ; then
         echo -n "attempting start of rTorrent..." >>$LOG_FILE
         /etc/init.d/rtorrentdaemon restart >>$LOG_FILE
@@ -147,7 +142,6 @@ function on_main_part_ok {
             echo -n "rTorrent OK..." >>$LOG_FILE
         fi
     fi
-
     if [ "$enable_aria2" = true ] ; then
         aria2_pid=$(pgrep aria2c)
         if [[ -z $aria2_pid ]]; then
@@ -158,7 +152,6 @@ function on_main_part_ok {
             echo -n "Aria2 OK..." >>$LOG_FILE
         fi
     fi
-    
     if [ "$enable_mldonkey" = true ] ; then
         mlnet_pid=$(pgrep mlnet)
         if [[ -z $mlnet_pid ]]; then
@@ -169,6 +162,7 @@ function on_main_part_ok {
             echo -n "MLdonkey OK..." >>$LOG_FILE
         fi
     fi
+    
 }
 
 

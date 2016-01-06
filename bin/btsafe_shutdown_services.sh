@@ -2,19 +2,32 @@
 
 # CONFIGURATION:
 
-source /opt/light-media-center/bin/btmain.inc.sh
+source /opt/light-media-center/bin/inc/btmain.inc.sh
 LOG_FILE="/var/log/btsafeshutdown.log"
 
 
 # IMPLEMENTATION:
 
 function try_clean_stop {
-         /etc/init.d/btmain stop
-         /etc/init.d/rtorrentdaemon stop
+        if [ "$use_systemctl" = true ] ; then
+            service btmain stop
+        else
+            /etc/init.d/btmain stop
+        fi
+         #/etc/init.d/rtorrentdaemon stop
          /etc/init.d/aria2 stop
          /etc/init.d/mldonkey-server stop
-         /etc/init.d/minidlna stop
-         /etc/init.d/samba stop
+        if [ "$use_systemctl" = true ] ; then
+            service minidlnad stop
+        else
+            /etc/init.d/minidlna stop
+        fi
+        if [ "$use_systemctl" = true ] ; then
+            service smbd stop
+            service nmbd stop
+        else
+            /etc/init.d/samba stop
+        fi
          sleep 4
 }
 
@@ -45,7 +58,7 @@ FINAL_ACTION="$1"
 
 
 # init Bash Shell Function Library (BSFL)
-source /opt/light-media-center/bin/bsfl
+source /opt/light-media-center/bin/inc/bsfl
 START=`now`
 
 sleep 2

@@ -9,7 +9,7 @@
     
     // configuration
 
-    $folder = "/media/extdiscTORRENTS/torrents";
+    $folder = $DOWNLOAD_DIR;
 
     if ( $is_authorized )
     {
