@@ -77,7 +77,29 @@ reboot
 ```
 
 
-## 4) Ensure debian user exists ##
+## 4) Configure the time zone ##
+
+Run 
+```
+date
+```
+
+and check if the time zone is already ok. If it's not, then you can check which timezones exist:
+
+```
+ls -l /usr/share/zoneinfo/Europe/
+```
+
+and modify accordingly to where you live. Note that changing the timezone seems to be highly 
+distribution-specific. For example :
+
+```
+dpkg-reconfigure tzdata
+reboot
+```
+
+
+## 5) Ensure debian user exists ##
 
 This guide makes the assumption that a "debian" user exists on the system.
 All software that does not need to run as root is run as "debian", so make sure it exists
@@ -89,7 +111,7 @@ adduser --home /home/debian debian
 ```
 
 
-## 5) Ensure required native software is installed ##
+## 6) Ensure required native software is installed ##
 
 ```
 apt-get install ntfs-3g build-essential
@@ -104,7 +126,7 @@ and change "automount = true" to "automount = false"
 
  
  
-## 6) Configure SAMBA sharing ##
+## 7) Configure SAMBA sharing ##
 
 ```
 apt-get install samba smbclient
@@ -145,7 +167,7 @@ smbclient -L LIGHTMEDIACENTE
 
 
 
-## 7) Configure SSMTP ##
+## 8) Configure SSMTP ##
 
 This step is useful only if you want to receive mail notifications
 
@@ -216,14 +238,21 @@ cat /etc/ssmtp/ssmtp.conf
 This should fail with "permission denied".
 
 
-## 8) Configure UPRECORDS ##
+
+## 9) Disable Eventually-Present Display Managers ##
+
+Depending on the way you will be using your SBC with Light Media Center you may not need
+any graphical system producing outputs on the SBC HDMI port. For this reason you can save CPU and memory
+by disabling desktop managers. 
+This step is highly distribution-specific. My OLinuxino with Debian Jessie came with lightdm enabled on boot.
+To disable it:
 
 ```
-apt-get install uptimed
+systemctl disable lightdm
 ```
 
 
-## 9) Configure SECURITY ##
+## 10) Configure SECURITY ##
 
 To increase security of the Media Center, you may want to change 
 the port for the SSH server from the standard port 22 to another port.

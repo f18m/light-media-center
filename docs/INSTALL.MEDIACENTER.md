@@ -82,9 +82,20 @@ cd light-media-center
 make download-aux
 make install-links
 make install-cron
-make install-initd
 make install-logrotate
 make install-email-on-boot
+```
+
+Depending on which boot system is used by your distribution (init.d or system.d) you need to run:
+
+```
+make install-initd
+```
+
+or
+
+```
+make install-systemd
 ```
 
 Now configure main script options:
@@ -339,9 +350,18 @@ Then open everywhere in your LAN the port 4080
    
    
 
+## 6) Configure UPRECORDS ##
+
+Uprecords is a nice utility keeping track of the highest uptimes a computer system ever had; 
+its stats are shown via Light Media Center "check system status" web page:
+
+```
+apt-get install uptimed
+```
+
    
    
-## 6) Configure WEB INTERFACE (IN LIGHTTPD) ##
+## 7) Configure WEB INTERFACE (IN LIGHTTPD) ##
 
 ### Raspberry PI note ###
 
@@ -402,7 +422,7 @@ Verify that the server is working by connecting via a web browser to the IP addr
 
 
 
-## 7) Configure dumptorrent ##
+## 8) Configure dumptorrent ##
 
 ```
 wget http://sourceforge.net/projects/dumptorrent/files/dumptorrent/1.2/dumptorrent-1.2.tar.gz/download 
