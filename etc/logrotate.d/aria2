@@ -1,5 +1,5 @@
 /var/log/aria2.log {
-	daily
+	weekly
 	missingok
 # keep 3 weeks worth of backlogs
 	rotate 3   

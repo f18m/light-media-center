@@ -35,8 +35,8 @@ mb = 1024*1024;
 gb = 1024*1024*1024;
 MAX_SIZE_THRESHOLD = 4*gb; 
 
-DL_PREFIX = "/media/extdiscTORRENTS/torrents/"
-DEST_PREFIX = ( "/media/extdiscMAIN/", "/media/extdiscMAIN2/", "/media/extdiscMAIN3/" )
+DL_PREFIX = "/media/extdisc/torrents/"
+DEST_PREFIX = ( "/media/extdisc/" )
 DEST_FOLDER_NAME = "to_reorder"
 LOGFILE = "/var/log/aria2hooks.log"
 

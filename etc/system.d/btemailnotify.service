@@ -1,0 +1,13 @@
+[Unit]
+Description=LightMedia Center boot notification email
+After=network.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/opt/light-media-center/bin/btemailnotify.sh
+WorkingDirectory=/opt/light-media-center/bin
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

@@ -105,10 +105,11 @@
             "ssh" => get_status_string_for_process("ssh"),
         );
 
-        $extdiscMAIN_df = get_df_string_for_partition("extdiscMAIN");
+        /*$extdiscMAIN_df = get_df_string_for_partition("extdiscMAIN");
         $extdiscMAIN2_df = get_df_string_for_partition("extdiscMAIN2");
         $extdiscMAIN3_df = get_df_string_for_partition("extdiscMAIN3");
-        $extdiscTORRENTS_df = get_df_string_for_partition("extdiscTORRENTS");
+        $extdiscTORRENTS_df = get_df_string_for_partition("extdiscTORRENTS");*/
+        $extdisc_df = get_df_string_for_partition("extdisc");
         
         $btmain_logfile = tail_logfile($btmain_logfile_fn, $logfile_linecount);
         $aria2_logfile = tail_logfile($aria2_logfile_fn, $logfile_linecount);
@@ -151,29 +152,19 @@
     </p>
 
     <p style='text-align:center'>
-        Local clock:&nbsp; <strong><?php echo $clock . " (" . $tz . ")"; ?></strong>
-    </p>
-
-    <p style='text-align:center'>
-        Uptime:&nbsp; <strong><?php echo $uptime; ?></strong>
-    </p>
-    <p style='text-align:center'>
-        <strong>Uptime records:</strong>
-    </p>
-    <p style='text-align:center'>
-        <tt><?php echo $uprecords; ?></tt>
-    </p>
-
-    <p style='text-align:center'>
+    <!--
         Free/total space on external disc MAIN partition:&nbsp; <?php echo $extdiscMAIN_df; ?><br/>
         Free/total space on external disc MAIN2 partition:&nbsp; <?php echo $extdiscMAIN2_df; ?><br/>
         Free/total space on external disc MAIN3 partition:&nbsp; <?php echo $extdiscMAIN3_df; ?><br/>
         Free/total space on external disc TORRENTS partition:&nbsp; <?php echo $extdiscTORRENTS_df; ?>
+        -->
+        
+        Free/total space on external disc MAIN partition:&nbsp; <?php echo $extdisc_df; ?><br/>
     </p>
 
 
     <p style='text-align:center'>
-         rTorrent server: <?php echo $status_string["rtorrent"]; ?> <br/>
+         <!-- rTorrent server: <?php echo $status_string["rtorrent"]; ?> <br/> -->
          Aria2 server: <?php echo $status_string["aria2"]; ?> <br/>
          MLdonkey server: <?php echo $status_string["mldonkey"]; ?> <br/>
          miniDLNA server: <?php echo $status_string["minidlna"]; ?> <br/>
@@ -218,6 +209,20 @@
   <textarea class="system_status" cols="90" readonly><?php echo $top; ?></textarea> -->
   <!-- </div> -->
   
+    <p style='text-align:center'>
+        Local clock:&nbsp; <strong><?php echo $clock . " (" . $tz . ")"; ?></strong>
+    </p>
+
+    <p style='text-align:center'>
+        Uptime:&nbsp; <strong><?php echo $uptime; ?></strong>
+    </p>
+    <p style='text-align:center'>
+        <strong>Uptime records:</strong>
+    </p>
+    <p style='text-align:center'>
+        <tt><?php echo $uprecords; ?></tt>
+    </p>
+
   <p>&nbsp;</p>
   
 <?php 

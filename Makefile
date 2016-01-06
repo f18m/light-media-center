@@ -12,7 +12,7 @@ all:
 update-install-folder:
 	# by default all bash glue scripts assume /opt/light-media-center is used as installation folder...
 	# if that's not the case some SED is required:
-	sed -i "s+/opt/light-media-center+$(current_dir)+g" bin/*.sh bin/inc/*.inc.sh etc/init.d/*.sh
+	sed -i "s+/opt/light-media-center+$(current_dir)+g" bin/*.sh bin/inc/*.inc.sh etc/init.d/*.sh etc/system.d/*.service
 
 download-aux:
 	# install auxiliary software under "web":
@@ -44,19 +44,19 @@ install-initd:
 install-systemd:
 	ln -sf $(current_dir)/etc/system.d/btmain.service /lib/systemd/system/btmain.service
 	ln -sf $(current_dir)/etc/system.d/minidlnad.service /lib/systemd/system/minidlnad.service
+	ln -sf $(current_dir)/etc/system.d/btemailnotify.service /lib/systemd/system/btemailnotify.service
 	# TODO remaining ones!
-	systemctl enable btmain
-
+	systemctl enable btmain   # start btmain on boot
 
 install-watchdog:
+	# use this target only if you have /root/reset_watchdog utility and soft-watchdog feature enabled
 	cp -pf etc/init.d/btwatchdog /etc/init.d/btwatchdog
 	update-rc.d btwatchdog defaults
 
 install-logrotate:
-	cp -pf etc/logrotate.d/aria2 /etc/logrotate.d/
-	cp -pf etc/logrotate.d/btmain /etc/logrotate.d/
-	cp -pf etc/logrotate.d/minidlna /etc/logrotate.d/
+	ln -sf $(current_dir)/etc/logrotate.d/aria2 /etc/logrotate.d/
+	ln -sf $(current_dir)/etc/logrotate.d/btmain /etc/logrotate.d/
+	ln -sf $(current_dir)/etc/logrotate.d/minidlna /etc/logrotate.d/
 
 install-email-on-boot:
-	echo "# send an email to inform about the boot" >>/etc/rc.local
-	echo "/usr/local/bin/btemailnotify.sh &" >>/etc/rc.local
+	systemctl enable btemailnotify
