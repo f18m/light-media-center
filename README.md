@@ -22,7 +22,7 @@ See  <a href="docs/INSTALL.md">INSTALL.md</a>.
 
 ## Future Directions ##
 
-### WebMin ### 
+### Webmin ### 
 Convert this project to <a href="http://doxfer.webmin.com/Webmin/Module_Development">Webmin modules</a> (unfortunately
 this would require me to learn Perl!). A webmin module for Minidlna already exists: http://sourceforge.net/p/minidlnawebmin
 
