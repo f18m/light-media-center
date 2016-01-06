@@ -3,14 +3,12 @@ Description=LightMedia Center main control loop daemon
 After=network.target
 
 [Service]
-Type=simple
 User=root
 Group=root
 ExecStart=/opt/light-media-center/bin/btmain.sh
-ProtectSystem=off
-ProtectHome=off
-PrivateDevices=on
-NoNewPrivileges=off
+ExecStop=/usr/bin/pkill btmain.sh
+WorkingDirectory=/opt/light-media-center/bin
+Type=simple
 
 [Install]
 WantedBy=multi-user.target

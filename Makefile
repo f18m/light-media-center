@@ -28,21 +28,15 @@ install-links:
 	cd bin/minidlna_utils && for script in *; do     ln -sf $(current_dir)/bin/minidlna_utils/$$script  /usr/local/bin/$$script ;  done
 
 install-cron:
-	echo "# Light Media Center cron script" >/etc/cron.d/light-media-center
-	echo "# check external disk every day at 8am" >>/etc/cron.d/light-media-center
-	echo "0 8 * * * $(current_dir)/bin/btextdiskcheck.sh >/dev/null 2>&1" >>/etc/cron.d/light-media-center
-	echo "# automatic rescan of media contents every day at 5pm" >>/etc/cron.d/light-media-center
-	echo "0 17 * * * $(current_dir)/bin/btminidlnareload.sh >/dev/null 2>&1" >>/etc/cron.d/light-media-center
+	ln -sf $(current_dir)/etc/cron.d/light-media-center /etc/cron.d/light-media-center
 
 install-initd:
-  # use this target only if your distribution is still using SysV init scripts, otherwise use install-systemd
+	# use this target only if your distribution is still using SysV init scripts, otherwise use install-systemd
 	cp -pf etc/init.d/btmain /etc/init.d/btmain
-	cp -pf etc/init.d/btwatchdog /etc/init.d/btwatchdog
 	cp -pf etc/init.d/mldonkey-server /etc/init.d/mldonkey-server
 	cp -pf etc/init.d/noip2 /etc/init.d/noip2
 	cp -pf etc/init.d/aria2 /etc/init.d/aria2
 	update-rc.d btmain defaults
-	update-rc.d btwatchdog defaults
 	update-rc.d mldonkey-server defaults
 	update-rc.d noip2 defaults
 	update-rc.d aria2 defaults
@@ -50,7 +44,13 @@ install-initd:
 install-systemd:
 	ln -sf $(current_dir)/etc/system.d/btmain.service /lib/systemd/system/btmain.service
 	ln -sf $(current_dir)/etc/system.d/minidlnad.service /lib/systemd/system/minidlnad.service
-  # TODO remaining ones!
+	# TODO remaining ones!
+	systemctl enable btmain
+
+
+install-watchdog:
+	cp -pf etc/init.d/btwatchdog /etc/init.d/btwatchdog
+	update-rc.d btwatchdog defaults
 
 install-logrotate:
 	cp -pf etc/logrotate.d/aria2 /etc/logrotate.d/
