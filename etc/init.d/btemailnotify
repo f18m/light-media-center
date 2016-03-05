@@ -1,0 +1,32 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:       btemailnotify
+# Required-Start: $networking
+# Required-Stop:
+# Should-Start:
+# Should-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Light Media Center email notifier
+# Description: Light Media Center email notifier
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+case "$1" in
+    start)
+    #log_daemon_msg "Starting Light Media Center email notifier"
+    /opt/light-media-center/bin/btemailnotify.sh
+    ;;
+    
+    stop)
+    ;;
+
+    restart)
+    ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+exit 0
