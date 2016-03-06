@@ -35,8 +35,8 @@
     
     function tail_logfile($logfile_fn, $logfile_linecount)
     {
-        if(!file_exists($logfile_fn))
-            return "";
+        if(!is_readable($logfile_fn))
+            return "Not existing or not readable";
             
         $file = file($logfile_fn);
         $file_linecount = count($file);
