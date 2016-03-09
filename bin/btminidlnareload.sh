@@ -32,7 +32,7 @@ function check_current_disc {
 
 # IMPLEMENTATION:
 
-source /opt/light-media-center/bin/bsfl
+source /opt/light-media-center/bin/inc/bsfl
 START=`now`
 
 # first of all, shutdown all services relying on ext discs:

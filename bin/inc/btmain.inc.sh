@@ -19,7 +19,7 @@ daemon_user="debian"
 daemon_user_uid="$(id -u $daemon_user)"
 daemon_user_gid="$(id -g $daemon_user)"
 
-use_systemctl=true
+use_systemctl=false
 
 # see my notes about best partitioning for Light Media Center:
 MAIN1disk=1

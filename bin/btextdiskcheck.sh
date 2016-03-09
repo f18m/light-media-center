@@ -43,11 +43,12 @@ function check_current_disc {
 
 # IMPLEMENTATION:
 
-source /opt/light-media-center/bin/bsfl
+source /opt/light-media-center/bin/inc/bsfl
 START=`now`
+msg "Starting $PORTAL_NAME external disc checker"
 
 # first of all, shutdown all services relying on ext discs:
-/opt/light-media-center/bin/btsafe_shutdown_services.sh        
+/bin/bash /opt/light-media-center/bin/btsafe_shutdown_services.sh        
 msg '***************************************************************************'
 for (( CURRENTdisk=1 ; CURRENTdisk <= $num_disks ; CURRENTdisk++ )); do
     check_current_disc
