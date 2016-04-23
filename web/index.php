@@ -81,7 +81,7 @@
           <p>Force a check of external disc(s)</p>
       </div>
       <div class="one-third column">
-          <?php write_link("minidlna-restart.php", "Restart DLNA"); ?>
+          <?php write_link("dlna-restart.php", "Restart DLNA"); ?>
           <p>Force MiniDLNA restart</p>
       </div>
       
