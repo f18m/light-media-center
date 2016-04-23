@@ -40,6 +40,7 @@ echo test >/media/extdisc/test-file
 sync
 cat /media/extdisc/test-file
  # verify the file was correctly written, eventually check "dmesg" to inspect kernel/driver activities
+rm /media/extdisc/test-file
 ```
 
 Finally setup some folders that will be used by softwares installed later.
@@ -50,7 +51,7 @@ mkdir -p /media/extdisc/.aria2
 
 - The folder where Aria2 stores incoming torrent files:
 ```
-mkdir -p /media/extdisc/torrents
+mkdir -p /media/extdisc/.in-download/torrents
 ```
 
 - The folder where Aria2 stores completely-downloaded files:
@@ -61,15 +62,16 @@ mkdir -p /media/extdisc/to_reorder
 - A symlink to the incoming files and to the downloaded ones:
 
 ```
-ln -s /media/extdisc/torrents /var/www/html/extdiscTORRENTS
-ln -s /media/extdisc/to_reorder /var/www/html/extdiscMAIN
+mkdir -p /var/www/html/extdiscTORRENTS /var/www/html/extdiscMAIN
+ln -s /media/extdisc/.in-download/torrents  /var/www/html/extdiscTORRENTS
+ln -s /media/extdisc/to_reorder             /var/www/html/extdiscMAIN
 ```
 
 Finally, ensure correct permissions are set for the user "debian":
 
 ```
-chown -R debian:debian /media/extdisc/.aria2 /media/extdisc/torrents /media/extdisc/to_reorder   /var/www/html/extdiscTORRENTS /var/www/html/extdiscMAIN
-chmod -R ug+rw /media/extdisc/.aria2 /media/extdisc/torrents /media/extdisc/to_reorder   /var/www/html/extdiscTORRENTS /var/www/html/extdiscMAIN
+chown -R debian:debian /media/extdisc/.aria2 /media/extdisc/.in-download/torrents /media/extdisc/to_reorder   /var/www/html/extdiscTORRENTS /var/www/html/extdiscMAIN
+chmod -R ug+rw /media/extdisc/.aria2 /media/extdisc/.in-download/torrents /media/extdisc/to_reorder   /var/www/html/extdiscTORRENTS /var/www/html/extdiscMAIN
 ```
 
 
@@ -83,6 +85,11 @@ make download-aux
 make install-links
 make install-cron
 make install-logrotate
+```
+
+An optional feature you may like is an automatic email upon each boot (assuming that you reboot your media center rarely):
+
+```
 make install-email-on-boot
 ```
 
@@ -122,6 +129,7 @@ apt-get install libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorb
 make
 make install-strip
 cp minidlna.conf /etc
+cp linux/minidlna.init.d.script /etc/init.d/minidlna
 
 
 echo >/var/log/minidlna.log
@@ -136,7 +144,7 @@ nano /etc/sysctl.conf
 
 ------------------ cut here ----------------------
 # for miniDLNA:
-fs.inotify.max_user_watches=163840
+fs.inotify.max_user_watches=250000
 ------------------ cut here ----------------------
 ```
 
@@ -176,6 +184,9 @@ log_dir=/var/log
 Test that it works correctly:
 
 ```
+mkdir -p /media/minidlna
+cd /media/minidlna && ln -s /media/extdisc/YOUR_MOVIES_FOLDER .
+
 minidlnad
 pgrep minidlnad   # verify it is up and running
 pkill minidlnad   # stop it
@@ -211,11 +222,8 @@ then:
 
 ```
 cd /opt
-wget https://github.com/tatsuhiro-t/aria2/archive/release-1.19.3.tar.gz
-tar -xvzf release-1.19.3.tar.gz
-rm release-1.19.3.tar.gz
-
-cd aria2-release-1.19.3
+wget https://github.com/tatsuhiro-t/aria2/releases/download/release-1.20.0/aria2-1.20.0.tar.xz
+tar -xvf aria2-1.20.0.tar.xz && rm aria2-1.20.0.tar.xz && cd aria2-1.20.0/
 
 apt-get install libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
 
@@ -286,9 +294,10 @@ cp /opt/light-media-center/etc/aria2.conf /etc
 
 echo >/var/log/aria2.log
 
-chown -R debian:debian /media/extdisc/.aria2
-chmod -R ug+rw /media/extdisc/.aria2 /var/log/aria2.log
-touch /media/extdisc/.aria2/last-session
+mkdir -p /media/extdisc/.in-download/aria2
+chown -R debian:debian /media/extdisc/.in-download/aria2  /var/log/aria2.log
+chmod -R ug+rw /media/extdisc/.in-download/aria2 /var/log/aria2.log
+touch /media/extdisc/.in-download/aria2/last-session
 
 /etc/init.d/aria2 start
 ```
@@ -412,7 +421,21 @@ And set:
 ------------------ cut here ----------------------
 ```
 
-to save memory. Finally attempt webserver start:
+to save memory. Then, enable h5ai file indexing:
+
+```
+nano /etc/lighttpd/lighttpd.conf
+```
+
+and locate the row with index.html and index.php and change it to:
+
+```
+------------------ cut here ----------------------
+index-file.names += ("index.html", "index.php", "/_h5ai/public/index.php")
+------------------ cut here ----------------------
+```
+
+Finally attempt webserver start:
 
 ```
 service lighttpd restart
@@ -425,11 +448,13 @@ Verify that the server is working by connecting via a web browser to the IP addr
 ## 8) Configure dumptorrent ##
 
 ```
+cd /opt
 wget http://sourceforge.net/projects/dumptorrent/files/dumptorrent/1.2/dumptorrent-1.2.tar.gz/download 
 mv download dumptorrent-1.2.tar.gz
 tar -xvzf dumptorrent-1.2.tar.gz
 cd dumptorrent-1.2
-make && make installr
+make   # note that as of v1.2 there is no "install" target
+cp dumptorrent /usr/local/bin
 ```
 
 
@@ -460,6 +485,14 @@ Test logrotation with command:
 logrotate -f /etc/logrotate.conf
 ```
 
+
+## CLEANUP ##
+
+```
+sudo apt-get --yes autoremove
+sudo apt-get --yes autoclean
+sudo apt-get --yes clean
+```
 
 ## BACKUP ##
 

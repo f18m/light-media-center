@@ -9,6 +9,9 @@ Other untested combinations _should_ work, too...
 Note that generally speaking all the following configurations and commands must be run as root.
 
 
+## 0) Partitioning ##
+
+
 
 ## 1) Configure networking ##
 
@@ -258,7 +261,7 @@ To increase security of the Media Center, you may want to change
 the port for the SSH server from the standard port 22 to another port.
 
 ```
-nano /etc/ssh/sshd_configfr
+nano /etc/ssh/sshd_config
 [change "Port 22" key]
 /etc/init.d/sshd restart
 ```
@@ -288,3 +291,85 @@ stored in the /etc/ssmtp/ssmtp.conf file!!):
 ```
 passwd
 ```
+
+## 11) Reduce write activities to your SD card ##
+
+To help your SD card / NAND FLASH memory to survive to long years of loyal service, you should
+try to decrease as much as possible writes to the filesystem stored on such memories. 
+To do this, I suggest following one of the following guides:
+
+- http://www.richardsramblings.com/2013/02/extend-the-life-of-your-rpi-sd-card/
+
+Note that to have /tmp as a RAM filesystem I had to first manually download the file "tmp.mount"
+from "systemd" debian package into "/lib/systemd/system/" (for some reason it was missing) and then run:
+```
+systemctl enable tmp.mount
+```
+
+My iostats on OLinuXino A20-OLinuXIno-LIME2 with Debian Jessie 8.1 before optimizations were:
+
+```
+$ iostat -d 300 3
+
+Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_        (2 CPU)
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+sda               0.01         0.06         0.01       1357        172
+mmcblk0           0.37         5.83         1.82     143350      44724
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+sda               0.00         0.00         0.00          0          0
+mmcblk0           0.43         0.00         2.81          0        844
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+sda               0.00         0.00         0.00          0          0
+mmcblk0           0.12         0.03         0.85          8        256
+```
+
+showing up to 844+256 KBs written in 10 minutes. After some basic optimizations:
+
+```
+$ iostat -d 300 3
+
+Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_        (2 CPU)
+Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+sda               0.64         3.53         0.41       1337        156
+mmcblk0           8.92       240.98         5.89      91282       2232
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+sda               0.00         0.00         0.00          0          0
+mmcblk0           0.46         4.91         1.97       1472        592
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+sda               0.00         0.00         0.00          0          0
+mmcblk0           0.35        15.47         0.91       4640        272
+```
+
+Another command useful to identify top-writer programs is:
+
+```
+iotop -o -P -b -n 2 -d 300
+```
+
+In my case I did:
+- mount root filesystem with noatime and commit every 60sec:
+
+```
+$ mount
+/dev/mmcblk0p2 on / type ext4 (rw,noatime,nodiratime,commit=60,data=ordered)
+...
+```
+
+- enabled /tmp mount point in RAM:
+
+```
+$ mount
+...
+tmpfs on /tmp type tmpfs (rw)
+...
+```
+
+- removed unwanted entries from /etc/cron.d
+

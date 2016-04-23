@@ -13,9 +13,16 @@ However, it contains also references and some notes that apply to other HW / SW 
 - Raspberry PI model B with Raspbian
 Later in this guide, such hardware will be referred to as "the single-board computer (SBC)".
 
-Moreover this guide assumes that you have:
+This guide assumes that you have, as hardware:
 - Internet connectivity on the SBC
 - An external hard drive, connected to the SBC either by USB or by SATA (in case of OLinuxino A20 LIME2)
+
+
+## Suggested Software ##
+
+http://www.armbian.com/
+
+http://www.armbian.com/olimex-lime-2/
 
 
 ## Configuration of Default System Packages ##

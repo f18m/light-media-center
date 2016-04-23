@@ -44,3 +44,8 @@ Add philesight (http://zevv.nl/play/code/philesight/) utility?
 ### Support for Remote hard drives ###
 Several new routers/modems allow for attaching network-shared storage disks.
 E.g. TPLINK W8970 modem activates an FTP server on a specific IP address.
+
+
+## Similar Projects ##
+
+- http://joerpi.blogspot.it/2013/05/raspberry-pi-bit-torrentdlnasamba_19.html 

@@ -41,6 +41,10 @@ install-initd:
 	update-rc.d noip2 defaults
 	update-rc.d aria2 defaults
 
+install-initd-email-on-boot:
+	cp -pf etc/init.d/btemailnotify /etc/init.d/btemailnotify
+	update-rc.d btemailnotify defaults
+    
 install-systemd:
 	ln -sf $(current_dir)/etc/system.d/btmain.service /lib/systemd/system/btmain.service
 	ln -sf $(current_dir)/etc/system.d/minidlnad.service /lib/systemd/system/minidlnad.service
@@ -48,6 +52,9 @@ install-systemd:
 	# TODO remaining ones!
 	systemctl enable btmain   # start btmain on boot
 
+install-systemd-email-on-boot:
+	systemctl enable btemailnotify
+    
 install-watchdog:
 	# use this target only if you have /root/reset_watchdog utility and soft-watchdog feature enabled
 	cp -pf etc/init.d/btwatchdog /etc/init.d/btwatchdog
@@ -58,5 +65,4 @@ install-logrotate:
 	ln -sf $(current_dir)/etc/logrotate.d/btmain /etc/logrotate.d/
 	ln -sf $(current_dir)/etc/logrotate.d/minidlna /etc/logrotate.d/
 
-install-email-on-boot:
-	systemctl enable btemailnotify
+
