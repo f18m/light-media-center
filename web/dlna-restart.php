@@ -1,7 +1,8 @@
 <?php 
 
   include 'inc/page-header.php';
-
+  include 'inc/page-utils.php';
+  
   if ( $is_authorized )
   {
     ini_set('display_errors', 'On');
