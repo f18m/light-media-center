@@ -28,6 +28,8 @@ function check_current_disc {
         if [[ "${disktype[$CURRENTdisk]}" == "ext4" ]]; then
             #e2fsck -pf /dev/sda5
             fsck_out=$( /sbin/e2fsck -Dftvy "$CURRENTdiskLABEL" 2>&1 )
+        elif [[ "${disktype[$CURRENTdisk]}" == "xfs" ]]; then
+            fsck_out=$( /sbin/xfs_repair -v "$CURRENTdiskLABEL" 2>&1 )
         elif [[ "${disktype[$CURRENTdisk]}" == "ntfs" ]]; then
             fsck_out=$( /bin/ntfsfix "$CURRENTdiskLABEL" 2>&1 )
         else
@@ -55,5 +57,5 @@ for (( CURRENTdisk=1 ; CURRENTdisk <= $num_disks ; CURRENTdisk++ )); do
     msg '  ---------------  '
 done  
 
-msg 'Restarting the main $PORTAL_NAME control loop'
+msg "Restarting the main $PORTAL_NAME control loop"
 /etc/init.d/btmain restart

@@ -15,6 +15,8 @@ enable_aria2=true
 enable_mldonkey=false
 enable_minidlna=true
 enable_samba=true
+enable_noip2=true
+
 daemon_user="debian"
 daemon_user_uid="$(id -u $daemon_user)"
 daemon_user_gid="$(id -g $daemon_user)"
@@ -23,11 +25,17 @@ use_systemctl=false
 
 # see my notes about best partitioning for Light Media Center:
 MAIN1disk=1
-disklabel[$MAIN1disk]="LIGHTMEDIACENTER"
-disktype[$MAIN1disk]="ext3"
-mountopt[$MAIN1disk]="rw,noatime,nodiratime,errors=remount-ro"   # for ext
+disklabel[$MAIN1disk]="LMC"
+disktype[$MAIN1disk]="xfs"
 target[$MAIN1disk]="/media/extdisc"
 targetcheck[$MAIN1disk]="${target[$MAIN1disk]}/.in-download/torrents"
+
+if [[ ${disktype[$MAIN1disk]} == "ext3" ]]; then
+    mountopt[$MAIN1disk]="rw,noatime,nodiratime,errors=remount-ro"   # for ext
+elif [[ ${disktype[$MAIN1disk]} == "xfs" ]]; then
+    mountopt[$MAIN1disk]="rw"   # for xfs
+fi
+
 
 # MAIN2disk=2
 # disklabel[$MAIN2disk]="MAIN2"

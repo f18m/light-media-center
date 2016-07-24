@@ -163,6 +163,16 @@ function on_main_part_ok {
         fi
     fi
     
+    if [ "$enable_noip2" = true ] ; then
+        noip2_pid=$(pgrep noip2)
+        if [[ -z $noip2_pid ]]; then
+            echo -n "WARNING: Noip2 down... trying to restart it..." >>$LOG_FILE
+            /etc/init.d/noip2 restart >>$LOG_FILE
+            problem_found=Noip2
+        else
+            echo -n "Noip2 OK..." >>$LOG_FILE
+        fi
+    fi
 }
 
 

@@ -1,6 +1,6 @@
 # Light Media Center cron script
-# check external disk every day at 8am
-0 8 * * * root /opt/light-media-center/bin/btextdiskcheck.sh >/dev/null 2>&1
+# check external disk every week at 8am
+0 8 1 * * root /opt/light-media-center/bin/btextdiskcheck.sh >/dev/null 2>&1
 # automatic rescan of media contents every day at 5pm
 0 17 * * * root /opt/light-media-center/bin/btminidlnareload.sh >/dev/null 2>&1
 
