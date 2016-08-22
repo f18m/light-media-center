@@ -1,7 +1,7 @@
 <?php 
 
-  include 'inc/page-header.php';
   include 'inc/page-utils.php';
+  include 'inc/page-header.php';
   
   if ( $is_authorized )
   {

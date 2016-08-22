@@ -12,7 +12,7 @@ PORTAL_NAME="Light Media Center";
 # services to start as soon as the external disk is mounted:
 enable_rtorrent=false
 enable_aria2=true
-enable_mldonkey=false
+enable_mldonkey=true
 enable_minidlna=true
 enable_samba=true
 enable_noip2=true
