@@ -11,22 +11,18 @@ LOG_FILE="/var/log/btminidlnareload.log"
 
 nmounted=0
 
-function check_current_disc {
-    CURRENTdiskLABEL="/dev/disk/by-label/${disklabel[$CURRENTdisk]}"
-    found=false
-    
-    msg "Checking for existence of symlink $CURRENTdiskLABEL"
-    if [[ -h "$CURRENTdiskLABEL" ]]; then
-        found=true
-    fi
-    
-    if [ "$found" = true ]; then
-    
-        msg "Found partition $CURRENTdiskLABEL..."
-        (( nmounted++ ))
-    fi
+function count_mounted_partitions {
+    for (( CURRENTpart=1; CURRENTpart <= $num_disks; CURRENTpart++ )); do
+            
+        classify_currentdisk $CURRENTpart
+        if [[ -d "${targetcheck[$CURRENTpart]}" ]]; then
+        
+            # this partition/disk is correctly mounted:
+            nmounted=$(( $nmounted + 1 ))
+            msg "Found partition ${targetcheck[$CURRENTpart]}... nmounted=$nmounted"
+        fi
+    done
 }
-
 
 
 
@@ -37,12 +33,9 @@ START=`now`
 
 # first of all, shutdown all services relying on ext discs:
 msg '***************************************************************************'
-for (( CURRENTdisk=1 ; CURRENTdisk <= $num_disks ; CURRENTdisk++ )); do
-    check_current_disc
-    msg '  ---------------  '
-done  
+count_mounted_partitions
 
-if (( "$nmounted" > "2" )); then
+if (( $nmounted > 0 )); then
     msg "Found $nmounted partitions mounted... regenerating minidlna DB"
     /etc/init.d/minidlna force-reload >$LOG_FILE 2>&1
 else
