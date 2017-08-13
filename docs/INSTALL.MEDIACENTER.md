@@ -124,7 +124,7 @@ tar -xvzf download
 rm download
 
 cd minidlna-1.1.5/
-apt-get install libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorbis-dev libid3tag0-dev libexif-dev libjpeg-dev libsqlite3-dev libogg-dev gettext
+apt-get install -y -y libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorbis-dev libid3tag0-dev libexif-dev libjpeg-dev libsqlite3-dev libogg-dev gettext
 ./configure
 make
 make install-strip
@@ -213,6 +213,14 @@ Test that it works correctly:
 pgrep noip2
 ```
 
+Install it permanently:
+
+```
+cp debian.noip2.sh /etc/init.d/noip2
+update-rc.d noip2 defaults
+```
+
+
 
 ## 4) Configure ARIA2 ##
 
@@ -225,7 +233,7 @@ cd /opt
 wget https://github.com/tatsuhiro-t/aria2/releases/download/release-1.20.0/aria2-1.20.0.tar.xz
 tar -xvf aria2-1.20.0.tar.xz && rm aria2-1.20.0.tar.xz && cd aria2-1.20.0/
 
-apt-get install libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
+apt-get install -y -y libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
 
 autoreconf -i
 ./configure --prefix=/usr
@@ -326,7 +334,7 @@ nano /var/www/html/webui-aria2/configuration.js
 ### 5) Configure MLDONKEY ##
 
 ```
-apt-get install mldonkey-server telnet
+apt-get install -y -y mldonkey-server telnet
 ```
 
 in /etc/default/mldonkey-server
@@ -365,7 +373,7 @@ Uprecords is a nice utility keeping track of the highest uptimes a computer syst
 its stats are shown via Light Media Center "check system status" web page:
 
 ```
-apt-get install uptimed
+apt-get install -y -y uptimed
 ```
 
    
@@ -383,7 +391,7 @@ If Kodi is running, via the graphical user interface, disable kodi webserver:
 ### Webserver setup ###
  
 ```
-apt-get install lighttpd php5-common php5-cgi php5
+apt-get install -y -y lighttpd php5-common php5-cgi php5
 
 # the apache user www-data must be in the debian group:
 /usr/sbin/usermod -a -G debian www-data
@@ -497,7 +505,7 @@ sudo apt-get --yes clean
 ## BACKUP ##
 
 ```
-apt-get install pv
+apt-get install -y pv
 dd if=/dev/mmcblk0 | pv -s 4G -peta | gzip -1 > /media/extdiscMAIN/backup-LightMC-13apr2014-working-debian.img.gz
 ```
 

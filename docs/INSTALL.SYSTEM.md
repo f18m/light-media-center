@@ -49,7 +49,7 @@ save
 ## 2) Configure bash aliases ##
 
 ```
-rm .bashrc && wget http://frm.users.sourceforge.net/macros/.bashrc
+rm .bashrc ; wget http://frm.users.sourceforge.net/macros/.bashrc
 bash
 ```
 
@@ -109,7 +109,7 @@ All software that does not need to run as root is run as "debian", so make sure 
 (you can check in /etc/passwd) or otherwise add it:
 
 ```
-apt-get install passwd
+apt-get install -y passwd
 adduser --home /home/debian debian
 ```
 
@@ -117,7 +117,7 @@ adduser --home /home/debian debian
 ## 6) Ensure required native software is installed ##
 
 ```
-apt-get install ntfs-3g build-essential
+apt-get install -y ntfs-3g build-essential
 ```
 
 ### Raspberry-specific note ###
@@ -132,7 +132,7 @@ and change "automount = true" to "automount = false"
 ## 7) Configure SAMBA sharing ##
 
 ```
-apt-get install samba smbclient
+apt-get install -y samba smbclient
 nano /etc/samba/smb.conf 
 
 ------------------ cut here ----------------------
@@ -164,9 +164,9 @@ service nmbd restart
 Then to verify the user debian was correctly registered:
 ```
 pdbedit -L -v
+smbclient -L THE-HOSTNAME-YOU-CHOSE
 ```
 
-smbclient -L LIGHTMEDIACENTE
 
 
 
@@ -175,7 +175,7 @@ smbclient -L LIGHTMEDIACENTE
 This step is useful only if you want to receive mail notifications
 
 ```
-apt-get install ssmtp mailutils
+apt-get install -y ssmtp mailutils
 nano /etc/ssmtp/ssmtp.conf
 
 ------------------ cut here ----------------------
@@ -271,7 +271,7 @@ malicious signs -- too many password failures, seeking for exploits, etc --
 is the "fail2ban" utility (http://www.fail2ban.org/):
 
 ```
-apt-get install fail2ban
+apt-get install -y fail2ban
 chown debian:debian /var/log/fail2ban.log
 ```
 
@@ -309,7 +309,8 @@ systemctl enable tmp.mount
 My iostats on OLinuXino A20-OLinuXIno-LIME2 with Debian Jessie 8.1 before optimizations were:
 
 ```
-$ iostat -d 300 3
+apt-get install -y sysstat iotop
+iostat -d 300 3    # will show 3 times the average I/O activity over a window of 5minutes 
 
 Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_        (2 CPU)
 
@@ -326,10 +327,10 @@ sda               0.00         0.00         0.00          0          0
 mmcblk0           0.12         0.03         0.85          8        256
 ```
 
-showing up to 844+256 KBs written in 10 minutes. After some basic optimizations:
+showing up to 844+256 KBs written in 10 minutes (the first measurement is usually very high and can be discarded). After some basic optimizations:
 
 ```
-$ iostat -d 300 3
+iostat -d 300 3
 
 Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_        (2 CPU)
 Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_
@@ -357,7 +358,7 @@ In my case I did:
 - mount root filesystem with noatime and commit every 60sec:
 
 ```
-$ mount
+mount
 /dev/mmcblk0p2 on / type ext4 (rw,noatime,nodiratime,commit=60,data=ordered)
 ...
 ```
@@ -365,7 +366,7 @@ $ mount
 - enabled /tmp mount point in RAM:
 
 ```
-$ mount
+mount
 ...
 tmpfs on /tmp type tmpfs (rw)
 ...
