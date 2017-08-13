@@ -128,6 +128,7 @@ function on_main_part_ok {
                 /etc/init.d/minidlna restart >>$LOG_FILE
             fi
             problem_found=miniDLNA
+            problem_logfile=/var/log/minidlna.log
         else
             echo -n "miniDLNA OK..." >>$LOG_FILE
         fi
@@ -138,6 +139,7 @@ function on_main_part_ok {
             echo -n "WARNING: rTorrent down... trying to restart it..." >>$LOG_FILE
             /etc/init.d/rtorrentdaemon restart >>$LOG_FILE
             problem_found=rTorrent
+            problem_logfile=/var/log/rtorrent.log
         else
             echo -n "rTorrent OK..." >>$LOG_FILE
         fi
@@ -148,6 +150,7 @@ function on_main_part_ok {
             echo -n "WARNING: Aria2 down... trying to restart it..." >>$LOG_FILE
             /etc/init.d/aria2 restart >>$LOG_FILE
             problem_found=Aria2
+            problem_logfile=/var/log/aria2.log
         else
             echo -n "Aria2 OK..." >>$LOG_FILE
         fi
@@ -158,11 +161,23 @@ function on_main_part_ok {
             echo -n "WARNING: MLdonkey down... trying to restart it..." >>$LOG_FILE
             /etc/init.d/mldonkey-server restart >>$LOG_FILE
             problem_found=MLdonkey
+            problem_logfile=/home/debian/.mldonkey/mlnet.log
         else
             echo -n "MLdonkey OK..." >>$LOG_FILE
         fi
     fi
     
+    if [ "$enable_noip2" = true ] ; then
+        noip2_pid=$(pgrep noip2)
+        if [[ -z $noip2_pid ]]; then
+            echo -n "WARNING: Noip2 down... trying to restart it..." >>$LOG_FILE
+            /etc/init.d/noip2 restart >>$LOG_FILE
+            problem_found=Noip2
+            problem_logfile=/var/log/messages
+        else
+            echo -n "Noip2 OK..." >>$LOG_FILE
+        fi
+    fi
 }
 
 
@@ -199,6 +214,7 @@ function on_part_ok {
         echo -n "${targetcheck[$CURRENTpart]} OK..." >>$LOG_FILE
 
         problem_found=false
+        problem_logfile=""
         
         # call part specific function, which will set $problem_found and $interval
         if $currentdisk_is_maindisk; then
@@ -213,7 +229,7 @@ function on_part_ok {
             #already_logged=true
         else
             interval=$interval_short
-            echo "problems found with $problem_found, will check again in $interval secs." >>$LOG_FILE
+            echo "problems found with $problem_found; please check $problem_logfile for more information; will check again in $interval secs." >>$LOG_FILE
         fi
     #fi
 }

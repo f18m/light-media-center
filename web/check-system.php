@@ -142,7 +142,7 @@
         }*/
         
         
-        exec('dmesg | tail -n 50', $dmesg_logfile);
+        exec('dmesg -T | tail -n 50', $dmesg_logfile);
         $dmesg_logfile = implode("\n", $dmesg_logfile);
         
 ?>

@@ -62,6 +62,15 @@ if (! $is_authorized ) {
               <p>You are not an authorized user.</p>
 
 <?php 
+} else {
+
+   // this works around an error of type 
+   //   Allowed memory size of 33554432 bytes exhausted (tried to allocate 43148176 bytes) in php
+   // that may happen on resource-constrained platforms, when using the PHP file() constructor on large
+   // log files (we do that only temporarily)
+   // TODO: best way to solve may be to find a smarter way to reduce peak memory usage
+
+   ini_set('memory_limit', '-1');
 }
 ?>
 
