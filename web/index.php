@@ -75,6 +75,9 @@
           <p>Force a restart of the SAMBA server</p>
       </div>
       -->
+	  
+	  
+	  
       
       <div class="one-third column">
           <?php write_link("force-check.php", "Force extdisc check"); ?>
@@ -85,6 +88,19 @@
           <p>Force MiniDLNA restart</p>
       </div>
       
+	  
+	  <!-- this is useful if you have an irrigation system and you want to remote control it: -->
+	  
+      <div class="one-third column">
+          <?php write_link("irrigation-start.php", "Start irrigation"); ?>
+          <p>Start irrigation</p>
+      </div>
+      <div class="one-third column">
+          <?php write_link("irrigation-stop.php", "Stop irrigation"); ?>
+          <p>Stop irrigation</p>
+      </div>
+	  
+	  
       <!-- apparently BeagleBone does not detect USB disks after startup... so it must be rebooted anyway: 
       <div class="one-third column">
           <?php write_link("btmain-stop.php", "Stop extdiscs"); ?>
