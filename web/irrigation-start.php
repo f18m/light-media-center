@@ -7,21 +7,12 @@
 
   if ( $is_authorized )
   {
-
-?>
-
-    <p>Micro-irrigation start:</p>
-
-	<tt>
-<?php 
-		$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_start.py');
-		$output = shell_exec($command);
-		echo $output;
-
-?>
-    </tt>
-
-<?php 
+    echo "<p>Micro-irrigation start:</p>"
+	echo "<tt>"
+	$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_start.py');
+	$output = shell_exec($command);
+	echo $output;
+    echo "</tt>"
   }
 
   include 'inc/link-to-home.php';
