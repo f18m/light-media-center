@@ -27,7 +27,7 @@ to be hosted on a different storage media (usually a magnetic hard drive) that i
 
 First of all, format your external hard disk as ext3 or ext4. This can be done using "gparted" from a Linux computer or
 using commercial software suites (e.g., Paragon Hard Disk Manager Suite) on a Windows computer.
-The ext3 or ext4 partition of the external hard disk is supposed to be named "LIGHTMEDIACENTER" in the following.
+The ext3 or ext4 partition of the external hard disk is supposed to be named "LMC" in the following.
 
 Then, on the SBC check that the disk can be correctly mounted:
 
@@ -35,7 +35,7 @@ Then, on the SBC check that the disk can be correctly mounted:
 mkdir -p /media/extdisc
 ls -l /dev/disk/by-label
  # verify that your hard disk is recognized
-mount /dev/disk/by-label/LIGHTMEDIACENTER /media/extdisc
+mount /dev/disk/by-label/LMC /media/extdisc
 echo test >/media/extdisc/test-file
 sync
 cat /media/extdisc/test-file
@@ -90,7 +90,7 @@ make install-logrotate
 An optional feature you may like is an automatic email upon each boot (assuming that you reboot your media center rarely):
 
 ```
-make install-email-on-boot
+make install-initd-email-on-boot     # or 'install-systemd-email-on-boot' if you are using SystemD instead of initd
 ```
 
 Depending on which boot system is used by your distribution (init.d or system.d) you need to run:
@@ -124,13 +124,13 @@ tar -xvzf download
 rm download
 
 cd minidlna-1.1.5/
-apt-get install -y -y libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorbis-dev libid3tag0-dev libexif-dev libjpeg-dev libsqlite3-dev libogg-dev gettext
+apt-get install-y libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorbis-dev libid3tag0-dev libexif-dev libjpeg-dev libsqlite3-dev libogg-dev gettext
 ./configure
 make
 make install-strip
 cp minidlna.conf /etc
 cp linux/minidlna.init.d.script /etc/init.d/minidlna
-
+chmod a+x /etc/init.d/minidlna
 
 echo >/var/log/minidlna.log
 mkdir -p /var/cache/minidlna
@@ -230,10 +230,10 @@ then:
 
 ```
 cd /opt
-wget https://github.com/tatsuhiro-t/aria2/releases/download/release-1.20.0/aria2-1.20.0.tar.xz
-tar -xvf aria2-1.20.0.tar.xz && rm aria2-1.20.0.tar.xz && cd aria2-1.20.0/
+wget https://github.com/aria2/aria2/releases/download/release-1.32.0/aria2-1.32.0.tar.gz
+tar -xvf aria2-1.32.0.tar.gz && rm aria2-1.32.0.tar.gz && cd aria2-1.32.0/
 
-apt-get install -y -y libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
+apt-get install-y libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
 
 autoreconf -i
 ./configure --prefix=/usr
@@ -334,7 +334,7 @@ nano /var/www/html/webui-aria2/configuration.js
 ### 5) Configure MLDONKEY ##
 
 ```
-apt-get install -y -y mldonkey-server telnet
+apt-get install-y mldonkey-server telnet
 ```
 
 in /etc/default/mldonkey-server
@@ -373,7 +373,7 @@ Uprecords is a nice utility keeping track of the highest uptimes a computer syst
 its stats are shown via Light Media Center "check system status" web page:
 
 ```
-apt-get install -y -y uptimed
+apt-get install-y uptimed
 ```
 
    
@@ -391,7 +391,7 @@ If Kodi is running, via the graphical user interface, disable kodi webserver:
 ### Webserver setup ###
  
 ```
-apt-get install -y -y lighttpd php5-common php5-cgi php5
+apt-get install-y lighttpd php5-common php5-cgi php5
 
 # the apache user www-data must be in the debian group:
 /usr/sbin/usermod -a -G debian www-data
@@ -506,6 +506,6 @@ sudo apt-get --yes clean
 
 ```
 apt-get install -y pv
-dd if=/dev/mmcblk0 | pv -s 4G -peta | gzip -1 > /media/extdiscMAIN/backup-LightMC-13apr2014-working-debian.img.gz
+dd if=/dev/mmcblk0 | pv -s 4G -peta | gzip -1 > /media/extdisc/backup-LMC-$(date +%F)-working.img.gz
 ```
 

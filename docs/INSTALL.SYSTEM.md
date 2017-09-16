@@ -70,13 +70,14 @@ nano /etc/hosts
 ```
 
 In particular ensure that the line beginning with
-127.0.0.1 resolves first to the new chosen hostname. E.g., if you chose "LightMC" as hostname your
-/etc/hosts file should start with "127.0.0.1       LightMC localhost"
+127.0.0.1 resolves first to the new chosen hostname. E.g., if you chose "LMC" as hostname your
+/etc/hosts file should start with "127.0.0.1       LMC localhost"
 
 Finally reboot and verify the new hostname is appearing at BASH prompt:
 
 ```
 reboot
+hostname -F     # should print out your new hostname
 ```
 
 
@@ -190,7 +191,7 @@ mailhub=smtp.gmail.com:587
 rewriteDomain=gmail.com
 
 # The full hostname
-hostname=LightMC
+hostname=LMC
 
 # Use SSL/TLS before starting negotiation
 UseTLS=Yes
@@ -220,8 +221,8 @@ gpasswd -a root mail
 nano /etc/ssmtp/revaliases
 
 ------------------ cut here ----------------------
-root:LightMC_admin@gmail.com:smtp.gmail.com:587
-debian:LightMC_debian@gmail.com:smtp.gmail.com:587
+root:LMC_admin@gmail.com:smtp.gmail.com:587
+debian:LMC_debian@gmail.com:smtp.gmail.com:587
 ------------------ cut here ----------------------
 ```
 
@@ -312,7 +313,7 @@ My iostats on OLinuXino A20-OLinuXIno-LIME2 with Debian Jessie 8.1 before optimi
 apt-get install -y sysstat iotop
 iostat -d 300 3    # will show 3 times the average I/O activity over a window of 5minutes 
 
-Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_        (2 CPU)
+Linux 3.4.103-00033-g9a1cd03-dirty (LMC)    01/06/16        _armv7l_        (2 CPU)
 
 Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
 sda               0.01         0.06         0.01       1357        172
@@ -332,8 +333,8 @@ showing up to 844+256 KBs written in 10 minutes (the first measurement is usuall
 ```
 iostat -d 300 3
 
-Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_        (2 CPU)
-Linux 3.4.103-00033-g9a1cd03-dirty (LightMC)    01/06/16        _armv7l_
+Linux 3.4.103-00033-g9a1cd03-dirty (LMC)    01/06/16        _armv7l_        (2 CPU)
+Linux 3.4.103-00033-g9a1cd03-dirty (LMC)    01/06/16        _armv7l_
 
 Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
 sda               0.64         3.53         0.41       1337        156
