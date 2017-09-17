@@ -10,7 +10,7 @@
   {
     echo "<p>Micro-irrigation start:</p>";
 	echo "<tt>";
-	$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_ctrl.py open');
+	$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_ctrl.py open 2>&1');
 	$output = shell_exec($command);
 	echo $output;
     echo "</tt>";
