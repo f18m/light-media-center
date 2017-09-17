@@ -3,16 +3,17 @@
   ini_set('display_errors', 'On');
   error_reporting(E_ALL | E_STRICT);
 
+  include 'inc/page-utils.php';
   include 'inc/page-header.php';
 
   if ( $is_authorized )
   {
-    echo "<p>Micro-irrigation start:</p>"
-	echo "<tt>"
-	$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_start.py');
+    echo "<p>Micro-irrigation start:</p>";
+	echo "<tt>";
+	$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_ctrl.py open');
 	$output = shell_exec($command);
 	echo $output;
-    echo "</tt>"
+    echo "</tt>";
   }
 
   include 'inc/link-to-home.php';
