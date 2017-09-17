@@ -8,12 +8,16 @@
 
   if ( $is_authorized )
   {
-    echo "<p>Micro-irrigation start:</p>";
-	echo "<tt>";
-	$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_ctrl.py open 2>&1');
+    echo "<p>Micro-irrigation starting:</p>";
+	echo "<p style='text-align:center; font-size: 200%; font-family: monospace;'><strong>";
+	//$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_ctrl.py open 2>&1');
+	
+	// NOTE: since the Python script will employ GPIO module, it will need ROOT permissions:
+	$command = 'sudo /opt/microirrigation-control/bin/lime2_valve_ctrl.py open 2>&1';
 	$output = shell_exec($command);
 	echo $output;
-    echo "</tt>";
+	   
+    echo "</strong></p><br/><br/>";
   }
 
   include 'inc/link-to-home.php';
