@@ -124,7 +124,7 @@ tar -xvzf download
 rm download
 
 cd minidlna-1.1.5/
-apt-get install-y libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorbis-dev libid3tag0-dev libexif-dev libjpeg-dev libsqlite3-dev libogg-dev gettext
+apt-get install -y libavformat-dev libavutil-dev libavcodec-dev libflac-dev libvorbis-dev libid3tag0-dev libexif-dev libjpeg-dev libsqlite3-dev libogg-dev gettext
 ./configure
 make
 make install-strip
@@ -224,16 +224,16 @@ update-rc.d noip2 defaults
 
 ## 4) Configure ARIA2 ##
 
-Note that packaged aria2 in Debian sid is too old (version 1.15.1 currently) so it's best to recompile it.
+Note that packaged aria2 in Debian sid is too old (version 1.33 currently) so it's best to recompile it.
 First visit https://github.com/tatsuhiro-t/aria2/releases/latest to find out the latest available release,
 then:
 
 ```
 cd /opt
-wget https://github.com/aria2/aria2/releases/download/release-1.32.0/aria2-1.32.0.tar.gz
-tar -xvf aria2-1.32.0.tar.gz && rm aria2-1.32.0.tar.gz && cd aria2-1.32.0/
+wget https://github.com/aria2/aria2/releases/download/release-1.33.0/aria2-1.33.0.tar.gz
+tar -xvf aria2-1.33.0.tar.gz && rm aria2-1.33.0.tar.gz && cd aria2-1.33.0/
 
-apt-get install-y libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
+apt-get install -y libxml2-dev nettle-dev libssl-dev libgcrypt-dev libgnutls28-dev libxml2-dev libcppunit-dev pkg-config automake autopoint libtool
 
 autoreconf -i
 ./configure --prefix=/usr
@@ -334,7 +334,7 @@ nano /var/www/html/webui-aria2/configuration.js
 ### 5) Configure MLDONKEY ##
 
 ```
-apt-get install-y mldonkey-server telnet
+apt-get install -y mldonkey-server telnet
 ```
 
 in /etc/default/mldonkey-server
@@ -373,7 +373,7 @@ Uprecords is a nice utility keeping track of the highest uptimes a computer syst
 its stats are shown via Light Media Center "check system status" web page:
 
 ```
-apt-get install-y uptimed
+apt-get install -y uptimed
 ```
 
    
@@ -391,7 +391,7 @@ If Kodi is running, via the graphical user interface, disable kodi webserver:
 ### Webserver setup ###
  
 ```
-apt-get install-y lighttpd php5-common php5-cgi php5
+apt-get install -y lighttpd php5-common php5-cgi php5
 
 # the apache user www-data must be in the debian group:
 /usr/sbin/usermod -a -G debian www-data

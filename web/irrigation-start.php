@@ -13,7 +13,7 @@
 	//$command = escapeshellcmd('/opt/microirrigation-control/bin/lime2_valve_ctrl.py open 2>&1');
 	
 	// NOTE: since the Python script will employ GPIO module, it will need ROOT permissions:
-	$command = 'sudo /opt/microirrigation-control/bin/lime2_valve_ctrl.py open 2>&1';
+	$command = 'sudo /opt/microirrigation-control/software-lime2/bin/lime2_valve_ctrl.py open 2>&1';
 	$output = shell_exec($command);
 	echo $output;
 	   
