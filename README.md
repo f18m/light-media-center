@@ -5,11 +5,11 @@ This project transforms a low-cost single-board computer, like the well-known Be
  
 Some features of the media center: 
 
-0. Runs a torrent client (<a href="https://aria2.github.io/">Aria2</a>) for downloading .torrent files on an external drive attached to the media center hardware.
-0. Runs an eDonkey client (<a href="http://mldonkey.sourceforge.net/">MLdonkey</a>) for downloading files from eDonkey Network or Kademlia network.
-0. Has a web interface built around open-source components (h5ai, webui-aria2, yaaw, etc)
-0. Responsive web design (thanks to Skeleton template) for use by smartphones/tablets
-0. Tested on Beaglebone, Raspberry and OLinuxino
+  * Runs a torrent client (<a href="https://aria2.github.io/">Aria2</a>) for downloading .torrent files on an external drive attached to the media center hardware.
+  * Runs an eDonkey client (<a href="http://mldonkey.sourceforge.net/">MLdonkey</a>) for downloading files from eDonkey Network or Kademlia network.
+  * Has a web interface built around open-source components (h5ai, webui-aria2, yaaw, etc)
+  * Responsive web design (thanks to Skeleton template) for use by smartphones/tablets
+  * Tested on Beaglebone, Raspberry and OLinuxino
 
 ## Screenshots ##
 
@@ -19,6 +19,14 @@ Some features of the media center:
 ## How to Install ##
 
 See  <a href="docs/INSTALL.md">INSTALL.md</a>.
+
+
+## Links with Other Projects ##
+
+You can enable integration with another project I created, to remotely command from your Light Media Center also your
+<a href="https://github.com/f18m/microirrigation-control">irrigation system</a>.
+Irrigation system is just a possibility, in practice you can modify the Light Media Center to connect it with anything else!
+
 
 ## Future Directions ##
 
