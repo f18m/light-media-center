@@ -31,7 +31,10 @@
 	<![endif]-->
  
   <script src="inc/utils.js"></script>
-
+  
+  <?php 
+  if ($this_page_needs_websocket_updates) { echo '<script src="inc/lime2node.js"></script>'; }
+  ?>
 
 	<!-- Favicons
 	================================================== -->
