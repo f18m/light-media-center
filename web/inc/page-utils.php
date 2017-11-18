@@ -11,6 +11,7 @@
 
 
   $is_authorized = False;
+  $this_page_needs_websocket_updates = False;
   
   // get encrypted user name either from GET vars (those encoded in the URL) or from POST
   if (isset($_GET["user"]))
