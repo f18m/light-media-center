@@ -11,6 +11,14 @@ Note that generally speaking all the following configurations and commands must 
 
 ## 0) Partitioning ##
 
+This guide does not require any specific partitioning scheme for the root filesystem of your 
+single-board computer (SBC) and the mass-storage HDD attached to it.
+
+However it is suggested to use a journaled filesystem for the root filesystem (e.g., ext3 or ext4)
+and a filesystem suitable for I/O loads like "xfs" for the mass-storage HDD.
+
+Additionally, the Light Media Center scripts will assume that your HDD has a well-defined label
+(it's configurable but by default it is assumed to be "LMC").
 
 
 ## 1) Configure networking ##
@@ -293,7 +301,30 @@ stored in the /etc/ssmtp/ssmtp.conf file!!):
 passwd
 ```
 
-## 11) Reduce write activities to your SD card ##
+## 11) Monitor your HDD health ##
+
+To monitor the health of the HDD attached to the SBC you can use S.M.A.R.T. tools (see https://www.smartmontools.org/):
+```
+apt-get install -y smartmontools
+```
+Then you can investigate your HDD status by running:
+```
+smartctl -a /dev/disk/by-label/LMC
+```
+to view the full S.M.A.R.T. report. This is usually quite difficult to understand (see https://wiki.lime-technology.com/Understanding_SMART_Reports for more info)
+but generally speaking you can just look for the overall self-assessment test result:
+```
+smartctl -a /dev/disk/by-label/LMC | grep "overall"
+SMART overall-health self-assessment test result: PASSED
+```
+or look for pre-failure indicators:
+```
+smartctl -a /dev/disk/by-label/LMC | grep "Pre-fail"
+```
+
+
+
+## 12) Reduce write activities to your SD card ##
 
 To help your SD card / NAND FLASH memory to survive to long years of loyal service, you should
 try to decrease as much as possible writes to the filesystem stored on such memories. 

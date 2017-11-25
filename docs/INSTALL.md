@@ -30,7 +30,7 @@ http://www.armbian.com/olimex-lime-2/
 See  <a href="INSTALL.SYSTEM.md">INSTALL.SYSTEM.md</a>.
 
 
-## Build/Configuration of Media Center Software ##
+## Build/Configuration of Light Media Center Software ##
 
 See  <a href="INSTALL.MEDIACENTER.md">INSTALL.MEDIACENTER.md</a>.
 
