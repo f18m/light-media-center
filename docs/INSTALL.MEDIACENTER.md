@@ -299,6 +299,7 @@ As of aria2 1.19.3, aria2 does not come with a default etc file, so a default on
 
 ```
 cp /opt/light-media-center/etc/aria2.conf /etc
+cp /opt/light-media-center/etc/init.d/aria2 /etc/init.d/
 
 echo >/var/log/aria2.log
 

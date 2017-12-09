@@ -32,26 +32,21 @@
       <div class="one-third column">
           <?php write_link("check-system.php", "Check System Status"); ?>
           <p>Check if everything is running fine</p>
-      </div>
-      
-      <!--
-      <div class="one-third column">
-          <?php write_link("/rutorrent", "ruTorrent Interface"); ?>
-          <p>Access a full-featured rTorrent web interface (not suggested for smartphones!)</p>
-      </div>
-      <div class="one-third column">
-          <?php write_link("/wtorrent", "wTorrent Interface"); ?>
-          <p>Access rTorrent web interface smartphone-friendly</p>
-      </div> -->
-      
+      </div>      
       <div class="one-third column">
           <?php write_link("/webui-aria2", "Aria2 Interface"); ?>
           <p>Access Aria2 torrent web interface</p>
       </div>
+<?php 
+    if ($ENABLE_MLDONKEY)   { 
+?>
       <div class="one-third column">
           <?php write_link("http://frm-bt.no-ip.org:4080", "MLdonkey Interface"); ?>
           <p>Access eMule web interface</p>
       </div>  
+<?php 
+    }
+?>   
       <div class="one-third column">
           <?php write_link("/extdiscMAIN", "Downloaded contents"); ?>
           <p>Access MAIN disc partition contents via web interface</p>
@@ -64,79 +59,25 @@
           <?php write_link("torrent-dump.php", "Show Past Torrents"); ?>
           <p>Get a list of in-download and past torrent contents</p>
       </div>
-      
-      <!-- now that minidlna rescan is in crontab, there's no real need to run it manually: 
-      <div class="one-third column">
-          <?php write_link("dlna-rescan.php", "Rescan Multimedia"); ?>
-          <p>You can force a mini-DLNA server rescan</p>
-      </div>
-      <div class="one-third column">
-          <?php write_link("samba-restart.php", "Restart SAMBA"); ?>
-          <p>Force a restart of the SAMBA server</p>
-      </div>
-      -->
-	  
-	  
-	  
-      
       <div class="one-third column">
           <?php write_link("force-check.php", "Force extdisc check"); ?>
           <p>Force a check of external disc(s)</p>
       </div>
       <div class="one-third column">
-          <?php write_link("dlna-restart.php", "Restart DLNA"); ?>
+          <?php write_link("dlna-rescan.php", "Rescan DLNA database"); ?>
           <p>Force MiniDLNA restart</p>
       </div>
-      
-	  
-	  <!-- this is useful if you have an irrigation system and you want to remote control it: -->
-	  
+<?php 
+    if ($ENABLE_DOMOTIC_PANEL)   { 
+?>
+	    <!-- this is useful if you have some sort of domotic system: -->
       <div class="one-third column">
-          <?php write_link("irrigation-start.php", "Start irrigation"); ?>
-          <p>Start irrigation</p>
+          <?php write_link("irrigation-start.php", "Domotic System Panel"); ?>
+          <p>Start/Stop domotic appliances</p>
       </div>
-      <div class="one-third column">
-          <?php write_link("irrigation-stop.php", "Stop irrigation"); ?>
-          <p>Stop irrigation</p>
-      </div>
-	  
-	  
-      <!-- apparently BeagleBone does not detect USB disks after startup... so it must be rebooted anyway: 
-      <div class="one-third column">
-          <?php write_link("btmain-stop.php", "Stop extdiscs"); ?>
-          <p>You can unmount external disc(s) (for safe removal)</p>
-      </div>
-      <div class="one-third column">
-          <?php write_link("btmain-restart.php", "Restart extdiscs"); ?>
-          <p>Use this after reattaching of external discs</p>
-      </div>
-      -->
-      
-      <!-- rTorrent is not used anymore:    
-      
-      <div class="one-third column">
-          <?php write_link("rtorrent-restart.php", "(Re)start rTorrent"); ?>
-          <p>You can force a restart of the rTorrent server</p>
-      </div>
-      <div class="one-third column">
-          <?php write_link("rtorrent-stop.php", "Stop rTorrent"); ?>
-          <p>You can force a stop of the rTorrent server</p>
-      </div>      
-      <div class="one-third column">
-          <?php write_link("aria2-restart.php", "(Re)start Aria2"); ?>
-          <p>You can force a restart of the Aria2 server</p>
-      </div>
-      <div class="one-third column">
-          <?php write_link("aria2-stop.php", "Stop Aria2"); ?>
-          <p>You can force a stop of the Aria2 server</p>
-      </div>
-      <div class="one-third column">
-          <?php write_link("fix-usb.php", "Force recheck USB bus"); ?>
-          <p>You can force a scan of the USB bus</p>
-      </div>
-      -->
-      
-      
+<?php 
+    }
+?>      
       <!-- for some actions, it is important to avoid having a dedicated page otherwise if the user
            reloads that page, it will trigger again an action that is often not wanted.
            E.g., if you open the reboot page, a reboot will be issued; by clicking the browser "refresh" button another

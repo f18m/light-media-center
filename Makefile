@@ -46,10 +46,13 @@ install-initd-email-on-boot:
 	update-rc.d btemailnotify defaults
     
 install-systemd:
-	ln -sf $(current_dir)/etc/system.d/btmain.service /lib/systemd/system/btmain.service
-	ln -sf $(current_dir)/etc/system.d/minidlnad.service /lib/systemd/system/minidlnad.service
-	ln -sf $(current_dir)/etc/system.d/btemailnotify.service /lib/systemd/system/btemailnotify.service
+	# IMPORTANT: apparently symlinks do not work well with SystemD, so we must copy files;
+	#            if we don't do that, we will be able to start/stop services but not to enable them on boot!
+	cp -f $(current_dir)/etc/system.d/btmain.service /lib/systemd/system/btmain.service
+	cp -f $(current_dir)/etc/system.d/minidlnad.service /lib/systemd/system/minidlnad.service
+	cp -f $(current_dir)/etc/system.d/btemailnotify.service /lib/systemd/system/btemailnotify.service
 	# TODO remaining ones!
+	systemctl daemon-reload
 	systemctl enable btmain   # start btmain on boot
 
 install-systemd-email-on-boot:

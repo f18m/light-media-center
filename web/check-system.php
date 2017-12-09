@@ -166,14 +166,27 @@
     <p style='text-align:center'>
          <!-- rTorrent server: <?php echo $status_string["rtorrent"]; ?> <br/> -->
          Aria2 server: <?php echo $status_string["aria2"]; ?> <br/>
+         
+<?php 
+        if ($ENABLE_MLDONKEY)   { 
+?>
          MLdonkey server: <?php echo $status_string["mldonkey"]; ?> <br/>
+<?php 
+        } 
+?>
          miniDLNA server: <?php echo $status_string["minidlna"]; ?> <br/>
          External disc mounter: <?php echo $status_string["btmain"]; ?> <br/>
     </p>
 
     <p style='text-align:center'>
          SAMBA: <?php echo $status_string["smb"]; ?> <br/>
+<?php 
+        if ($ENABLE_NOIP2)   { 
+?>
          noIP2 client: <?php echo $status_string["noip2"]; ?> <br/>
+<?php 
+        } 
+?>
          SSH server: <?php echo $status_string["ssh"]; ?> <br/>
     </p>
 
@@ -186,19 +199,26 @@
 
   <strong>Aria2 log file</strong> (last <?php echo $logfile_linecount; ?> lines):<br/>
   <textarea class="system_status" cols="90" readonly><?php echo $aria2_logfile; ?></textarea>
-        
+<!-- 
   <strong>Aria2 HOOKS log file</strong> (last <?php echo $logfile_linecount; ?> lines):<br/>
   <textarea class="system_status" cols="90" readonly><?php echo $aria2hooks_logfile; ?></textarea>
-        
+-->
+<?php 
+        if ($ENABLE_MLDONKEY)   { 
+?>
   <strong>MlDonkey log file</strong> (last <?php echo $logfile_linecount; ?> lines):<br/>
   <textarea class="system_status" cols="90" readonly><?php echo $mldonkey_logfile; ?></textarea>
-        
+<?php 
+        } 
+?>
   <strong>Minidlna log file</strong> (last <?php echo $logfile_linecount; ?> lines):<br/>
   <textarea class="system_status" cols="90" readonly><?php echo $minidlna_logfile; ?></textarea>
   
+<!-- 
   <strong>Fail2ban log file</strong> (last <?php echo $logfile_linecount; ?> lines):<br/>
   <textarea class="system_status" cols="90" readonly><?php echo $fail2ban_logfile; ?></textarea>
-  
+-->
+
   <!-- <div style="float:left"> -->
   <strong>Process tree:</strong><br/>
   <textarea class="system_status" cols="90" readonly><?php echo $pstree; ?></textarea>

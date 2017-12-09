@@ -14,13 +14,20 @@
 
   if ( $is_authorized )
   {
-    echo '<p>Micro-irrigation starting:</p>';
-    
     // Execute the real command via websocket operations; see lime2node.js. In this way we can immediately return to the client
     // a complete webpage. We will then read the log file produced by the PHP utility and update via a WebSocket this page in realtime.
 
     // simply create a DIV that will be updated through a WebSocket by our Javascript code:
-    echo '<textarea id="js_updated" class="system_status" cols="90" readonly></textarea>';
+?>    
+    <p>Domotic system control:</p>
+    <textarea id="js_updated" class="system_status" cols="90" readonly></textarea>
+    
+    <input id="irrigationTurnOn" type="button" value="Start irrigation" onclick="ws_send_turnon1();" />
+    <input id="irrigationTurnOff" type="button" value="Stop irrigation" onclick="ws_send_turnoff1();" />
+    <input id="lightsTurnOn" type="button" value="Turn on Christmas lights" onclick="ws_send_turnon2();" />
+    <input id="lightsTurnOff" type="button" value="Turn off Christmas lights" onclick="ws_send_turnoff2();" />
+
+<?php
   }
 
   include 'inc/link-to-home.php';

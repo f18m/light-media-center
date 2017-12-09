@@ -1,14 +1,6 @@
 <?php
 
-
-  // CONFIGURATION
-
-  $VERSION = "1.5";
-  $PORTAL_NAME = "Light Media Center";
-  $DOWNLOAD_DIR = "/media/extdisc/.in-download/torrents";
-
-
-
+  include 'inc/config.php';
 
   $is_authorized = False;
   $this_page_needs_websocket_updates = False;

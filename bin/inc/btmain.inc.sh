@@ -12,10 +12,10 @@ PORTAL_NAME="Light Media Center";
 # services to start as soon as the external disk is mounted:
 enable_rtorrent=false
 enable_aria2=true
-enable_mldonkey=true
+enable_mldonkey=false
 enable_minidlna=true
 enable_samba=true
-enable_noip2=true
+enable_noip2=false
 
 daemon_user="debian"
 daemon_user_uid="$(id -u $daemon_user)"
