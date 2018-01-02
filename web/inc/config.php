@@ -8,6 +8,8 @@
 
   $ENABLE_MLDONKEY = False;
   $ENABLE_NOIP2 = False;
+  
+  $DOWNLOADED_CONTENTS_EXT = array("avi", "mp4", "mkv", "idx", "sub");
 ?>
 
 

@@ -58,4 +58,4 @@ for (( CURRENTdisk=1 ; CURRENTdisk <= $num_disks ; CURRENTdisk++ )); do
 done  
 
 msg "Restarting the main $PORTAL_NAME control loop"
-/etc/init.d/btmain restart
+service btmain restart

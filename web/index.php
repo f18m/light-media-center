@@ -48,23 +48,27 @@
     }
 ?>   
       <div class="one-third column">
-          <?php write_link("/extdiscMAIN", "Downloaded contents"); ?>
+          <?php write_link("/extdiscMAIN", "Downloaded Contents"); ?>
           <p>Access MAIN disc partition contents via web interface</p>
       </div>
       <div class="one-third column">
-          <?php write_link("/extdiscTORRENTS", "In-download contents"); ?>
+          <?php write_link("/extdiscTORRENTS", "In-download Contents"); ?>
           <p>Access TORRENTS disc partition contents via web interface</p>
+      </div>
+      <div class="one-third column">
+          <?php write_link("move-downloaded.php", "Move Downloaded Contents"); ?>
+          <p>Move downloaded contents to the &quot;to_order&quot; folder</p>
       </div>
       <div class="one-third column">
           <?php write_link("torrent-dump.php", "Show Past Torrents"); ?>
           <p>Get a list of in-download and past torrent contents</p>
       </div>
       <div class="one-third column">
-          <?php write_link("force-check.php", "Force extdisc check"); ?>
+          <?php write_link("force-check.php", "Force HDD Check"); ?>
           <p>Force a check of external disc(s)</p>
       </div>
       <div class="one-third column">
-          <?php write_link("dlna-rescan.php", "Rescan DLNA database"); ?>
+          <?php write_link("dlna-rescan.php", "Rescan DLNA Database"); ?>
           <p>Force MiniDLNA restart</p>
       </div>
 <?php 
