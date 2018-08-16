@@ -3,7 +3,7 @@
 # CONFIGURATION:
 
 source /opt/light-media-center/bin/inc/btmain.inc.sh
-LOG_FILE="/var/log/btextdiskcheck.log"
+LOG_FILE="/var/log/btmain.log"
 
 
 
@@ -50,12 +50,15 @@ START=`now`
 msg "Starting $PORTAL_NAME external disc checker"
 
 # first of all, shutdown all services relying on ext discs:
-/bin/bash /opt/light-media-center/bin/btsafe_shutdown_services.sh        
+/bin/bash /opt/light-media-center/bin/btsafe_shutdown_services.sh
+
+# run the check
 msg '***************************************************************************'
 for (( CURRENTdisk=1 ; CURRENTdisk <= $num_disks ; CURRENTdisk++ )); do
     check_current_disc
     msg '  ---------------  '
-done  
+done
 
+# finally restart
 msg "Restarting the main $PORTAL_NAME control loop"
-service btmain restart
+service btmain start

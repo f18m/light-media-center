@@ -3,7 +3,7 @@
 # CONFIGURATION:
 
 source /opt/light-media-center/bin/inc/btmain.inc.sh
-LOG_FILE="/var/log/btsafeshutdown.log"
+LOG_FILE="/var/log/btmain.log"
 
 
 # IMPLEMENTATION:
