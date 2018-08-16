@@ -76,7 +76,7 @@
 ?>
 	    <!-- this is useful if you have some sort of domotic system: -->
       <div class="one-third column">
-          <?php write_link("irrigation-start.php", "Domotic System Panel"); ?>
+          <?php write_link("domotic-panel.php", "Domotic System Panel"); ?>
           <p>Start/Stop domotic appliances</p>
       </div>
 <?php 
