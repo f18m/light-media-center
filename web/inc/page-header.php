@@ -19,10 +19,10 @@
 	<!-- CSS
   ================================================== -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="stylesheets/bootstrap.min.css">
 	<link rel="stylesheet" href="stylesheets/normalize.css">
 	<link rel="stylesheet" href="stylesheets/skeleton.css">
 	<link rel="stylesheet" href="stylesheets/my.css">
-
 
 	<!-- Javascript
   ================================================== -->
@@ -31,6 +31,8 @@
 	<![endif]-->
  
   <script src="inc/utils.js"></script>
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="inc/bootstrap.min.js"></script>
   
   <?php 
   if ($this_page_needs_websocket_updates) { echo '<script src="inc/lime2node.js"></script>'; }

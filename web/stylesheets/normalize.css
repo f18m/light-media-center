@@ -18,6 +18,10 @@ html {
 
 body {
   margin: 0;
+  background-image: url("../images/background-pattern6.jpg");
+  /*background-repeat: no-repeat;*/
+  background-repeat: repeat;
+  /*background-size: 100% 100%;*/
 }
 
 /* HTML5 display definitions

@@ -30,6 +30,7 @@ input[type="submit"] {
     height: 3em;
     padding: 5px 5px 5px 5px;
     width: 95%;
+    background-color: darkgrey;
 }
 
 form {
@@ -44,3 +45,28 @@ div.myfooter {
     text-align: center;
 }
 
+hr {
+  border-top: 3px solid darkgrey;
+}
+
+input.green {
+    font-size: 1.4em;
+    text-transform: none;
+    white-space: normal; 
+    height: auto;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    width: 45%;
+    background-color: lightgreen;
+}
+
+input.red {
+    font-size: 1.4em;
+    text-transform: none;
+    white-space: normal; 
+    height: auto;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    width: 45%;
+    background-color: #FE7575;
+}
