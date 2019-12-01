@@ -195,9 +195,13 @@ pkill minidlnad   # stop it
  
  
  
-## 3) Configure NO-IP stuff ##
+## 3) Configure DynamicDNS services ##
 
-From http://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client/
+### 3.1) Configure No-IP client
+
+In case you are using noip.com as DDNS provider, you can easily install on your Light Media Center
+the no-ip client for linux.
+The following commands were taken from http://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client/
 
 ```
 cd /opt
@@ -220,6 +224,20 @@ cp debian.noip2.sh /etc/init.d/noip2
 update-rc.d noip2 defaults
 ```
 
+
+### 3.2) Configure DD Client
+
+In case your DDNS provider is something like changeip.com, then you will need to use their "DD Client" 
+on your Light Media Center
+
+```
+apt-get install ddclient
+```
+
+This will guide you into setup and configuration of the client... in my case ddclient did not work 
+with changeip.com (at least at the time of this writing: Nov 2019)... so I used instead the "rinker.sh"
+script that can be downloaded from 
+https://www.changeip.com/accounts/index.php?rp=/download/category/4/Linux-or-OSX.html
 
 
 ## 4) Configure ARIA2 ##
